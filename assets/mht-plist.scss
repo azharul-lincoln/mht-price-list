@@ -1,0 +1,118 @@
+.mht-price-list {
+  background-color: #fff;
+
+  .mht-plist-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+
+    &:nth-child(2n) {
+      background-color: #f8f8f8;
+    }
+
+    &.plist-header {
+      .plist-row-item {
+        .tire-set-item {
+          display: flex;
+          justify-content: center;
+
+          .pdetail-headings {
+            background: #000;
+            color: #fff;
+            display: flex;
+            width: 100%;
+            justify-content: center;
+
+            div {
+              border-right: 1px solid #ccc;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 5px 10px;
+            }
+
+            .product-name {
+              flex: 4;
+            }
+            .product-price {
+              flex: 1;
+            }
+            .product-quentatty {
+              flex: 1;
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+
+    .plist-row-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tire-size {
+      flex: 1;
+      border-right: 1px solid #ddd;
+    }
+
+    .tire-detail-container {
+      flex: 5;
+      display: flex;
+      flex-direction: row;
+      .tire-set-item {
+        border-right: 1px solid #ddd;
+        flex: 1;
+        // background: yellow;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        &.tire-manufacturer {
+          display: flex;
+          align-items: center;
+        }
+
+        .product-detail-container {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          justify-content: stretch;
+          border-bottom: 1px solid #ccc;
+
+          &:last-child {
+            // border-bottom: none;
+          }
+          div {
+            border-right: 1px solid #ccc;
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+          }
+
+          .product-name {
+            flex: 4;
+          }
+          .product-price {
+            flex: 1;
+          }
+          .product-quentatty {
+            flex: 1;
+            border-right: none;
+          }
+        }
+      }
+    }
+
+    &.plist-header {
+      border-bottom: 1px solid #ddd;
+      .plist-row-item {
+      }
+    }
+  }
+}
