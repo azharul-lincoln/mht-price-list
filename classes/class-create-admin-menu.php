@@ -107,143 +107,127 @@ class AZ_MHT_Create_Admin_Page {
     <div class="mht-plist-row">
         <div class="tire-size plist-row-item">
             <h3>245/75R22.5</h3>
-
         </div>
 
 
         <div class="tire-detail-container plist-row-item">
 
-            <div class="tire-manufacturer tire-set-item">
-                <h3>Toyo</h3>
-            </div>
+            <div class="brand-items">
+                <div class="brand-item">
+                    <div class="tire-manufacturer tire-set-item">
+                        <h3>Toyo</h3>
+                    </div>
 
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product nameProduct nameProduct</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product nameProduct nameProduct</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
 
-                <div class="product-detail-container">
-                    <div class="product-name"> <a href="#">Product nameProduct nameProduct nameProduct nameProduct
-                            name</a> </div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
+                        <div class="product-detail-container">
+                            <div class="product-name"> <a href="#">Product nameProduct nameProduct nameProduct
+                                    nameProduct
+                                    name</a> </div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
 
-                <div class="product-detail-container">
-                    <div class="product-name">Product nameProduct nameProduct nameProduct nameProduct name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
+                    </div>
 
-            </div>
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                    </div>
 
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-            </div>
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                    </div>
 
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <!-- .brand-item end -->
 
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-            </div>
+                <div class="brand-item">
+                    <div class="tire-manufacturer tire-set-item">
+                        <h3>Goodyear</h3>
+                    </div>
+
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product nameProduct nameProduct</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+
+                        <div class="product-detail-container">
+                            <div class="product-name"> <a href="#">Product nameProduct nameProduct nameProduct
+                                    nameProduct
+                                    name</a> </div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+
+                        <div class="product-detail-container">
+                            <div class="product-name">Product nameProduct nameProduct nameProduct nameProduct name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+
+                    </div>
+
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                    </div>
+
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                    </div>
+
+                    <div class="tire-set-item">
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                        <div class="product-detail-container">
+                            <div class="product-name">Product name</div>
+                            <div class="product-price">$20</div>
+                            <div class="product-quentatty">5</div>
+                        </div>
+                    </div>
+                </div> <!-- .brand-item end -->
+            </div><!-- .brand-items end -->
 
         </div> <!-- .tire-detail-container end -->
     </div><!-- .mht-plist-row end -->
-
-
-
-
-    <div class="mht-plist-row">
-        <div class="tire-size plist-row-item">
-            <h3>245/75R22.5</h3>
-
-        </div>
-
-
-        <div class="tire-detail-container plist-row-item">
-
-            <div class="tire-manufacturer tire-set-item">
-                <h3>Toyo</h3>
-            </div>
-
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product nameProduct nameProduct</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-
-                <div class="product-detail-container">
-                    <div class="product-name">Product nameProduct nameProduct nameProduct nameProduct name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-
-                <div class="product-detail-container">
-                    <div class="product-name">Product nameProduct nameProduct nameProduct nameProduct name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-
-            </div>
-
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-            </div>
-
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-            </div>
-
-            <div class="tire-set-item">
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-                <div class="product-detail-container">
-                    <div class="product-name">Product name</div>
-                    <div class="product-price">$20</div>
-                    <div class="product-quentatty">5</div>
-                </div>
-            </div>
-
-        </div> <!-- .tire-detail-container end -->
-    </div><!-- .mht-plist-row end -->
-
-
-
 </div><!-- .mht-price-list end -->
-
 <?php
     }
 

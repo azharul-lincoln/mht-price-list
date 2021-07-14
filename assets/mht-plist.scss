@@ -107,6 +107,26 @@
           }
         }
       }
+
+      .brand-items {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .brand-item {
+          display: flex;
+          border-bottom: 1px solid #ccc;
+          align-items: stretch;
+
+          .tire-set-item {
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #ccc;
+            // border-left: 1px solid #ccc;
+            height: auto;
+          }
+        }
+      }
     }
 
     &.plist-header {

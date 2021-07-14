@@ -180,6 +180,38 @@
   border-right: none;
 }
 
+.mht-price-list .mht-plist-row .tire-detail-container .brand-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.mht-price-list .mht-plist-row .tire-detail-container .brand-items .brand-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.mht-price-list .mht-plist-row .tire-detail-container .brand-items .brand-item .tire-set-item {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-right: 1px solid #ccc;
+  height: auto;
+}
+
 .mht-price-list .mht-plist-row.plist-header {
   border-bottom: 1px solid #ddd;
 }
