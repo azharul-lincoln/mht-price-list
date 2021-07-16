@@ -1,5 +1,6 @@
 .mht-price-list {
   background-color: #fff;
+  width: 100%;
 
   .mht-plist-row {
     display: flex;
@@ -49,6 +50,7 @@
 
     .plist-row-item {
       display: flex;
+      flex: 1;
       justify-content: center;
       align-items: center;
     }
@@ -97,6 +99,9 @@
 
           .product-name {
             flex: 4;
+            a {
+              text-decoration: none;
+            }
           }
           .product-price {
             flex: 1;
@@ -119,6 +124,7 @@
           align-items: stretch;
 
           .tire-set-item {
+            flex-grow: 1;
             align-items: center;
             justify-content: center;
             border-right: 1px solid #ccc;
@@ -131,8 +137,6 @@
 
     &.plist-header {
       border-bottom: 1px solid #ddd;
-      .plist-row-item {
-      }
     }
   }
 }
