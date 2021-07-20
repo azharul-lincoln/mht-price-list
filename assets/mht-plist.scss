@@ -58,6 +58,11 @@
     .tire-size {
       flex: 1;
       border-right: 1px solid #ddd;
+
+      h3 {
+        color: #795548;
+        font-size: 22px;
+      }
     }
 
     .tire-detail-container {
@@ -105,10 +110,12 @@
           }
           .product-price {
             flex: 1;
+            font-weight: bold;
           }
           .product-quentatty {
             flex: 1;
             border-right: none;
+            font-weight: bold;
           }
         }
       }

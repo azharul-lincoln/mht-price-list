@@ -7,6 +7,22 @@
 class AZ_MHT_Create_Admin_Page
 {
 
+	public $widths = ['12', '12R', '11R', '19.5', '215', '225', '235', '245', '255', '265', '275', '285', '295', '305', '315', '445', '8', '8R'];
+
+	public $ratios = ['36.00', '40.00', '65', '70', '75', '80'];
+
+	public $sizes = ['1', '17.5', '19.5', '22.5', '24.5', '245', '51', '57'];
+
+	public function print_all_items_body(){
+		foreach($this->widths as $key_width => $width ){
+			foreach($this->ratios as $key_ration => $ratio ){
+				foreach($this->sizes as $key_size => $size ){
+					$this->print_product_list_row($width, $ratio, $size); //loop
+				}
+			}
+		}
+	}
+
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
@@ -47,7 +63,7 @@ class AZ_MHT_Create_Admin_Page
 		$this->print_product_list_row('245', '75', '22.5'); //loop
 		$this->print_product_list_row('265', '75', '22.5'); //loop
 		$this->print_product_list_row('275', '80', '22.5'); //loop
-
+		//$this->print_all_items_body();
 		$this->print_pricelist_footer();
 	}
 
