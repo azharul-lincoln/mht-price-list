@@ -12,7 +12,7 @@ class MHT_MasterPriceList {
 
     public function register_actions(){
         add_filter( 'woocommerce_product_data_store_cpt_get_products_query', [$this, 'handle_custom_query_var'], 10, 2 );
-        add_action('template_redirect', [$this, 'test']);
+       // add_action('template_redirect', [$this, 'test']);
     }
 
     function test(){
