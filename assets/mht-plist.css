@@ -1,5 +1,6 @@
 .mht-price-list {
   background-color: #fff;
+  width: 100%;
 }
 
 .mht-price-list .mht-plist-row {
@@ -78,6 +79,9 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -91,6 +95,11 @@
       -ms-flex: 1;
           flex: 1;
   border-right: 1px solid #ddd;
+}
+
+.mht-price-list .mht-plist-row .tire-size h3 {
+  color: #795548;
+  font-size: 22px;
 }
 
 .mht-price-list .mht-plist-row .tire-detail-container {
@@ -167,10 +176,15 @@
           flex: 4;
 }
 
+.mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .product-name a {
+  text-decoration: none;
+}
+
 .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .product-price {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  font-weight: bold;
 }
 
 .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .product-quentatty {
@@ -178,6 +192,42 @@
       -ms-flex: 1;
           flex: 1;
   border-right: none;
+  font-weight: bold;
+}
+
+.mht-price-list .mht-plist-row .tire-detail-container .brand-items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.mht-price-list .mht-plist-row .tire-detail-container .brand-items .brand-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.mht-price-list .mht-plist-row .tire-detail-container .brand-items .brand-item .tire-set-item {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-right: 1px solid #ccc;
+  height: auto;
 }
 
 .mht-price-list .mht-plist-row.plist-header {

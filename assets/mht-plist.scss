@@ -1,5 +1,6 @@
 .mht-price-list {
   background-color: #fff;
+  width: 100%;
 
   .mht-plist-row {
     display: flex;
@@ -49,6 +50,7 @@
 
     .plist-row-item {
       display: flex;
+      flex: 1;
       justify-content: center;
       align-items: center;
     }
@@ -56,6 +58,11 @@
     .tire-size {
       flex: 1;
       border-right: 1px solid #ddd;
+
+      h3 {
+        color: #795548;
+        font-size: 22px;
+      }
     }
 
     .tire-detail-container {
@@ -97,13 +104,39 @@
 
           .product-name {
             flex: 4;
+            a {
+              text-decoration: none;
+            }
           }
           .product-price {
             flex: 1;
+            font-weight: bold;
           }
           .product-quentatty {
             flex: 1;
             border-right: none;
+            font-weight: bold;
+          }
+        }
+      }
+
+      .brand-items {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .brand-item {
+          display: flex;
+          border-bottom: 1px solid #ccc;
+          align-items: stretch;
+
+          .tire-set-item {
+            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #ccc;
+            // border-left: 1px solid #ccc;
+            height: auto;
           }
         }
       }
@@ -111,8 +144,6 @@
 
     &.plist-header {
       border-bottom: 1px solid #ddd;
-      .plist-row-item {
-      }
     }
   }
 }

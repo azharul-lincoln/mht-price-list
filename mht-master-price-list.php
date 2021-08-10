@@ -28,6 +28,7 @@ function load_scripts() {
     ] );
 }
 
+require_once MHT_PLIS_PATH . 'classes/class-mht-master-price-list.php';
 require_once MHT_PLIS_PATH . 'classes/class-create-admin-menu.php';
 require_once MHT_PLIS_PATH . 'classes/class-create-settings-routes.php';
 
@@ -121,51 +122,10 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 
 
 
-/**
- * Handle a custom 'customvar' query var to get products with the 'customvar' meta.
- * @param array $query - Args for WP_Query.
- * @param array $query_vars - Query vars from WC_Product_Query.
- * @return array modified $query
- */
-function az_handle_custom_query_var( $query, $query_vars ) {
-    // echo '<pre>';
-    // print_r($query_vars);
-	if ( ! empty( $query_vars['mht_custom_query_price_list'] ) ) {
-
-        $query['meta_query'][] = array(
-            'relation' => 'AND',
-            array(
-                'key' => 'width',
-                'value' => $query_vars['mht_custom_query_price_list']['width'],
-                'compare' => '=',
-            ),
-            array(
-                'key' => 'ratio',
-                'value' => $query_vars['mht_custom_query_price_list']['ratio'],
-                'compare' => '=',
-            ),
-            array(
-                'key' => 'rim',
-                'value' => $query_vars['mht_custom_query_price_list']['rim'],
-                'compare' => '=',
-            )
-            );
-
-	}
-
-    //print_r($query_vars);
-
-	return $query;
-}
-add_filter( 'woocommerce_product_data_store_cpt_get_products_query', 'az_handle_custom_query_var', 10, 2 );
-
-//$products = wc_get_products( array( 'customvar' => 'somevalue' ) );
-
-
 //test section
 
 // add_action('template_redirect', 'az_custom_product_search');
-add_action('template_redirect', 'az_test');
+//add_action('template_redirect', 'az_test');
 
 function az_test(){
     echo '<pre>';
@@ -179,11 +139,75 @@ function az_test(){
     ) ) );
 
     echo count($products);
+    
     foreach($products as $product){
         print_r($product->get_name());
         var_dump(get_manufacturer_name_by_index(get_post_meta($product->get_id(), 'tyerBrand', true)));
         echo '<br>';
     }
+
+
+    $master_price_list_arr = array(
+        array(
+            'tire_size' => '245/75R22.5',
+            'manufacturers' => array(
+                array(
+                    'name' => 'Toyo',
+                    '2_tire_set' => array(
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                    ), 
+
+                    '4_tire_set' => array(
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                    ),
+                    
+                    '6_tire_set' => array(
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                    ),
+
+                    '8_tire_set' => array(
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                        array(
+                            'produt_name' => 'product link',
+                            'price' => '$900',
+                            'qty'   => 7
+                        ),
+                    ) 
+                    )
+            )
+        )
+    );
 
     die();
 }
