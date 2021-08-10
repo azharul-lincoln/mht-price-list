@@ -23,6 +23,7 @@ class AZ_MHT_Create_Admin_Page
 		}
 	}
 
+
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
@@ -60,10 +61,10 @@ class AZ_MHT_Create_Admin_Page
 	public function mht_master_plist_html()
 	{
 		$this->print_pricelist_header();
-		$this->print_product_list_row('245', '75', '22.5'); //loop
-		$this->print_product_list_row('265', '75', '22.5'); //loop
-		$this->print_product_list_row('275', '80', '22.5'); //loop
-		//$this->print_all_items_body();
+		// $this->print_product_list_row('245', '75', '22.5'); //loop
+		// $this->print_product_list_row('265', '75', '22.5'); //loop
+		// $this->print_product_list_row('275', '80', '22.5'); //loop
+		$this->print_all_items_body();
 		$this->print_pricelist_footer();
 	}
 
