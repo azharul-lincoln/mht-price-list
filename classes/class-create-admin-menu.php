@@ -24,9 +24,37 @@ class AZ_MHT_Create_Admin_Page
 	}
 
 
+	public function all_products_body_arr(){
+		$MHT_MasterPriceList = new MHT_MasterPriceList();
+		$tire_size_item_arrayes = [];
+
+		foreach($this->widths as $key_width => $width ){
+			foreach($this->ratios as $key_ration => $ratio ){
+				foreach($this->sizes as $key_size => $size ){
+					//$this->print_product_list_row($width, $ratio, $size); //loop
+					$tire_size_item_arr = $MHT_MasterPriceList->tire_size_item_arr($width, $ratio, $size);
+
+					if(!empty($tire_size_item_arr['manufacturers'])){
+						$tire_size_item_arrayes[] = $tire_size_item_arr;
+					}
+				}
+			}
+		}
+
+		return $tire_size_item_arrayes;
+	}
+
+
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
+		//add_action('template_redirect', [$this, 'test']);
+	}
+
+
+	public function test(){
+		print_r($this->all_products_body_arr());
+		die();
 	}
 
 	public function create_admin_menu()
