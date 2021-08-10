@@ -97,6 +97,7 @@ class MHT_MasterPriceList {
 
         $products = wc_get_products( array(
             'limit' => -1,
+			'status' => 'publish',
             'mht_custom_query_price_list' => array(
             'width' => $width,
             'ratio' => $ratio,
