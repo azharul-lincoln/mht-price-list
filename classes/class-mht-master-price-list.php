@@ -89,6 +89,10 @@ class MHT_MasterPriceList {
             '25' => __('Yokohama', 'woocommerce')
         );
 
+		if(!isset( $options_arr[$index] )){
+			return false;
+		}
+
         return $options_arr[$index];
     }
 
