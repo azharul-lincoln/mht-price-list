@@ -7,7 +7,7 @@ class MHT_MasterPriceList {
 
     function __construct()
     {
-        $this->currency_symbol = get_woocommerce_currency_symbol();
+        $this->currency_symbol = '$';
     }
 
     public function register_actions(){
@@ -88,6 +88,10 @@ class MHT_MasterPriceList {
             '24' => __('Westlake', 'woocommerce'),
             '25' => __('Yokohama', 'woocommerce')
         );
+
+		if(!isset( $options_arr[$index] )){
+			return false;
+		}
 
         return $options_arr[$index];
     }
