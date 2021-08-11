@@ -32,24 +32,47 @@ class MHT_MasterPriceList {
 
         if ( ! empty( $query_vars['mht_custom_query_price_list'] ) ) {
 
-            $query['meta_query'][] = array(
-                'relation' => 'AND',
-                array(
-                    'key' => 'width',
-                    'value' => $query_vars['mht_custom_query_price_list']['width'],
-                    'compare' => '=',
-                ),
-                array(
-                    'key' => 'ratio',
-                    'value' => $query_vars['mht_custom_query_price_list']['ratio'],
-                    'compare' => '=',
-                ),
-                array(
-                    'key' => 'rim',
-                    'value' => $query_vars['mht_custom_query_price_list']['rim'],
-                    'compare' => '=',
-                )
-                );
+            // $query['meta_query'][] = array(
+            //     'relation' => 'AND',
+            //     array(
+            //         'key' => 'width',
+            //         'value' => $query_vars['mht_custom_query_price_list']['width'],
+            //         'compare' => '=',
+            //     ),
+            //     array(
+            //         'key' => 'ratio',
+            //         'value' => $query_vars['mht_custom_query_price_list']['ratio'],
+            //         'compare' => '=',
+            //     ),
+            //     array(
+            //         'key' => 'rim',
+            //         'value' => $query_vars['mht_custom_query_price_list']['rim'],
+            //         'compare' => '=',
+            //     )
+            //     );
+
+
+			$query['tax_query'] = array(
+				'relation' => 'AND',
+				array(
+					'taxonomy'        => 'pa_width',
+					'field'           => 'slug',
+					'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
+					'operator'        => 'IN',
+				),
+				array(
+					'taxonomy'        => 'pa_size',
+					'field'           => 'slug',
+					'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
+					'operator'        => 'IN',
+				),
+				array(
+					'taxonomy'        => 'pa_ratio',
+					'field'           => 'slug',
+					'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
+					 'operator'        => 'IN',
+				),
+			);
 
         }
 
