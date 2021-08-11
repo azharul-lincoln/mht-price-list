@@ -7,7 +7,7 @@ class MHT_MasterPriceList {
 
     function __construct()
     {
-        $this->currency_symbol = get_woocommerce_currency_symbol();
+        $this->currency_symbol = '$';
     }
 
     public function register_actions(){
