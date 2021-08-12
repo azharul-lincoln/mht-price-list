@@ -16,21 +16,27 @@ if( ! defined( 'ABSPATH' ) ) : exit(); endif; // No direct access allowed.
 define ( 'MHT_PLIS_PATH', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 define ( 'MHT_PLIST_URL', trailingslashit( plugins_url( '/', __FILE__ ) ) );
 
+require_once MHT_PLIS_PATH . 'classes/class-mht-master-price-list.php';
+require_once MHT_PLIS_PATH . 'classes/class-create-admin-menu.php';
+require_once MHT_PLIS_PATH . 'classes/class-create-settings-routes.php';
+
 /**
  * Loading Necessary Scripts
  */
 add_action( 'admin_enqueue_scripts', 'load_scripts' );
 function load_scripts() {
+	$AZ_MHT_Create_Admin_Page = new AZ_MHT_Create_Admin_Page();
+
     wp_enqueue_script( 'wp-react-kickoff', MHT_PLIST_URL . 'dist/bundle.js', [ 'jquery', 'wp-element' ], wp_rand(), true );
     wp_localize_script( 'wp-react-kickoff', 'appLocalizer', [
         'apiUrl' => home_url( '/wp-json' ),
+		'products' => $AZ_MHT_Create_Admin_Page->all_products_body_arr(),
         'nonce' => wp_create_nonce( 'wp_rest' ),
     ] );
 }
 
-require_once MHT_PLIS_PATH . 'classes/class-mht-master-price-list.php';
-require_once MHT_PLIS_PATH . 'classes/class-create-admin-menu.php';
-require_once MHT_PLIS_PATH . 'classes/class-create-settings-routes.php';
+
+
 
 
 function get_manufacturer_name_by_index( $index ) {
@@ -93,9 +99,9 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 				'value' => $rim,
 				'compare' => '=',
 			)
-		), 
+		),
 	);
-	
+
 	//$the_query = new WP_Query( $args );
 
     echo '<pre>';
@@ -110,7 +116,7 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 
 	// if ( $the_query->have_posts() ) :
 	// 	while ( $the_query->have_posts() ) : $the_query->the_post();
-	// 		echo '<li>' . get_the_title() . '</li>'; 
+	// 		echo '<li>' . get_the_title() . '</li>';
 	// 	endwhile;
 	// endif;
 
@@ -130,7 +136,7 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 function az_test(){
     echo '<pre>';
 
-    $products = wc_get_products( array( 
+    $products = wc_get_products( array(
         'limit' => -1,
         'mht_custom_query_price_list' => array(
         'width' => '245',
@@ -139,7 +145,7 @@ function az_test(){
     ) ) );
 
     echo count($products);
-    
+
     foreach($products as $product){
         print_r($product->get_name());
         var_dump(get_manufacturer_name_by_index(get_post_meta($product->get_id(), 'tyerBrand', true)));
@@ -164,7 +170,7 @@ function az_test(){
                             'price' => '$900',
                             'qty'   => 7
                         ),
-                    ), 
+                    ),
 
                     '4_tire_set' => array(
                         array(
@@ -178,7 +184,7 @@ function az_test(){
                             'qty'   => 7
                         ),
                     ),
-                    
+
                     '6_tire_set' => array(
                         array(
                             'produt_name' => 'product link',
@@ -203,7 +209,7 @@ function az_test(){
                             'price' => '$900',
                             'qty'   => 7
                         ),
-                    ) 
+                    )
                     )
             )
         )

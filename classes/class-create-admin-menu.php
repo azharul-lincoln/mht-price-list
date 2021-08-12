@@ -72,6 +72,19 @@ class AZ_MHT_Create_Admin_Page
 		);
 
 		add_action('load-' . $mht_plist_menu_page, [$this, 'load_admin_css']);
+
+		//react menu section
+		$mht_plist_menu_page_react = add_menu_page(
+			__('React Master Price', 'wp-react-kickoff'),
+			__('React Master Price', 'wp-react-kickoff'),
+			$capability,
+			$slug.'-react',
+			[$this, 'react_menu'],
+			'dashicons-screenoptions'
+		);
+
+		add_action('load-' . $mht_plist_menu_page_react, [$this, 'load_admin_css']);
+
 	}
 
 	public function load_admin_css()
@@ -95,6 +108,12 @@ class AZ_MHT_Create_Admin_Page
 		$this->print_all_items_body();
 		$this->print_pricelist_footer();
 	}
+
+
+	public function react_menu(){
+		 echo '<div class="wrap"><div id="wprk-admin-app"></div></div>';
+	}
+
 
 	public function menu_page_template()
 	{
