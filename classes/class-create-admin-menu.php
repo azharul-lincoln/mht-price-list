@@ -318,11 +318,17 @@ class AZ_MHT_Create_Admin_Page
         if(empty($tire_size_item_arr['manufacturers'])){
             return;
         }
+
+		$tire_size = $tire_size_item_arr['tire_size'];
+		$tire_size = str_replace("-",".", $tire_size);
+		$tire_size = str_replace("r/","/", $tire_size);
+		$tire_size = strtoupper($tire_size);
+
 	?>
 
 <div class="mht-plist-row">
     <div class="tire-size plist-row-item">
-        <h3><?php echo strtoupper($tire_size_item_arr['tire_size']); ?></h3>
+        <h3><?php echo $tire_size; ?></h3>
     </div>
 
     <div class="tire-detail-container plist-row-item">
