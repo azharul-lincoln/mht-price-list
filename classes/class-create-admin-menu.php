@@ -7,16 +7,16 @@
 class AZ_MHT_Create_Admin_Page
 {
 
-	public $widths = ['12', '12R', '11R', '19.5', '215', '225', '235', '245', '255', '265', '275', '285', '295', '305', '315', '445', '8', '8R'];
+	public $widths = [];
 
-	public $ratios = ['36.00', '40.00', '65', '70', '75', '80'];
+	public $ratios = [];
 
-	public $sizes = ['1', '17.5', '19.5', '22.5', '24.5', '245', '51', '57'];
+	public $sizes = [];
 
 	public function print_all_items_body(){
-		foreach($this->widths as $key_width => $width ){
-			foreach($this->ratios as $key_ration => $ratio ){
-				foreach($this->sizes as $key_size => $size ){
+		foreach($this->widths as $width ){
+			foreach($this->ratios as $ratio ){
+				foreach($this->sizes as $size ){
 					$this->print_product_list_row($width, $ratio, $size); //loop
 				}
 			}
@@ -27,6 +27,58 @@ class AZ_MHT_Create_Admin_Page
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
+		add_action('init', [$this, 'set_attributes']);
+		//add_action('init', [$this, 'test'], 99);
+	}
+
+	function set_attributes(){
+		$this->widths = $this->get_terms('pa_width');
+		$this->sizes = $this->get_terms('pa_ratio');
+		$this->ratios = $this->get_terms('pa_size');
+		$this->ratios[]= '';
+	}
+
+	function get_terms($texenomy){
+		$tex_arr = [];
+		$terms = get_terms(
+			[
+				'taxonomy' => $texenomy,
+				'hide_empty' => true,
+			]
+			);
+
+			if(!empty($terms)){
+				foreach($terms as $term) {
+					$tex_arr[] = $term->slug;
+				}
+			}
+
+			return $tex_arr;
+	}
+
+	function test() {
+		// $width_arr = [];
+		// $widths = get_terms(
+		// 	[
+		// 		//'taxonomy' => 'pa_width',
+		// 		//'taxonomy' => 'pa_ratio',
+		// 		'taxonomy' => 'pa_size',
+		// 		'hide_empty' => true,
+		// 	]
+		// 	);
+
+		// if(!empty($widths)){
+		// 	foreach($widths as $width) {
+		// 		$width_arr[] = $width->slug;
+		// 	}
+		// }
+
+		 	echo '<pre>';
+		// 	print_r($width_arr);
+
+		print_r([$this->widths, $this->sizes, $this->ratios]);
+
+		die();
 	}
 
 	public function create_admin_menu()
@@ -270,7 +322,7 @@ class AZ_MHT_Create_Admin_Page
 
 <div class="mht-plist-row">
     <div class="tire-size plist-row-item">
-        <h3><?php echo $tire_size_item_arr['tire_size'] ?></h3>
+        <h3><?php echo strtoupper($tire_size_item_arr['tire_size']); ?></h3>
     </div>
 
     <div class="tire-detail-container plist-row-item">

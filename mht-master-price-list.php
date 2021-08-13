@@ -3,7 +3,7 @@
  * Plugin Name: MHT Master Price List
  * Author: Azharul Lincoln
  * Author URI: https://woonative.com
- * Version: 1.0.0
+ * Version: 1.0.1
  * Description: MHT Master Price List.
  * Text-Domain: wp-react-kickoff
  */
@@ -93,9 +93,9 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 				'value' => $rim,
 				'compare' => '=',
 			)
-		), 
+		),
 	);
-	
+
 	//$the_query = new WP_Query( $args );
 
     echo '<pre>';
@@ -110,7 +110,7 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 
 	// if ( $the_query->have_posts() ) :
 	// 	while ( $the_query->have_posts() ) : $the_query->the_post();
-	// 		echo '<li>' . get_the_title() . '</li>'; 
+	// 		echo '<li>' . get_the_title() . '</li>';
 	// 	endwhile;
 	// endif;
 
@@ -130,7 +130,7 @@ function az_custom_product_search($width='', $ratio='', $rim='') {
 function az_test(){
     echo '<pre>';
 
-    $products = wc_get_products( array( 
+    $products = wc_get_products( array(
         'limit' => -1,
         'mht_custom_query_price_list' => array(
         'width' => '245',
@@ -139,7 +139,7 @@ function az_test(){
     ) ) );
 
     echo count($products);
-    
+
     foreach($products as $product){
         print_r($product->get_name());
         var_dump(get_manufacturer_name_by_index(get_post_meta($product->get_id(), 'tyerBrand', true)));
@@ -164,7 +164,7 @@ function az_test(){
                             'price' => '$900',
                             'qty'   => 7
                         ),
-                    ), 
+                    ),
 
                     '4_tire_set' => array(
                         array(
@@ -178,7 +178,7 @@ function az_test(){
                             'qty'   => 7
                         ),
                     ),
-                    
+
                     '6_tire_set' => array(
                         array(
                             'produt_name' => 'product link',
@@ -203,7 +203,7 @@ function az_test(){
                             'price' => '$900',
                             'qty'   => 7
                         ),
-                    ) 
+                    )
                     )
             )
         )
