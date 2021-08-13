@@ -12,13 +12,13 @@ class MHT_MasterPriceList {
 
     public function register_actions(){
         add_filter( 'woocommerce_product_data_store_cpt_get_products_query', [$this, 'handle_custom_query_var'], 10, 2 );
-       // add_action('template_redirect', [$this, 'test']);
+        //add_action('template_redirect', [$this, 'test']);
     }
 
     function test(){
         //255 75 22.5 shuld not reurn any item
         echo '<pre>';
-        print_r($this->tire_size_item_arr( '245', '75', '22.5' ));
+        print_r(count($this->get_producs_by_size( '12r', '', '22-5' )));
         die();
     }
 
@@ -52,27 +52,63 @@ class MHT_MasterPriceList {
             //     );
 
 
-			$query['tax_query'] = array(
-				'relation' => 'AND',
-				array(
+			//print_r($query_vars['mht_custom_query_price_list']);
+
+			$tax_query_arr = array(
+				'relation' => 'AND'
+			);
+
+			if(!empty($query_vars['mht_custom_query_price_list']['width'])){
+				$tax_query_arr[] =    array(
 					'taxonomy'        => 'pa_width',
 					'field'           => 'slug',
 					'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
 					'operator'        => 'IN',
-				),
-				array(
+				);
+			}
+
+			if(!empty($query_vars['mht_custom_query_price_list']['ratio'])){
+				$tax_query_arr[] =    array(
 					'taxonomy'        => 'pa_size',
 					'field'           => 'slug',
 					'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
 					'operator'        => 'IN',
-				),
-				array(
+				);
+			}
+
+			if(!empty($query_vars['mht_custom_query_price_list']['rim'])){
+				$tax_query_arr[] =    array(
 					'taxonomy'        => 'pa_ratio',
 					'field'           => 'slug',
 					'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
-					 'operator'        => 'IN',
-				),
-			);
+					'operator'        => 'IN',
+				);
+			}
+
+
+			// $query['tax_query'] = array(
+			// 	'relation' => 'AND',
+			// 	array(
+			// 		'taxonomy'        => 'pa_width',
+			// 		'field'           => 'slug',
+			// 		'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
+			// 		'operator'        => 'IN',
+			// 	),
+			// 	array(
+			// 		'taxonomy'        => 'pa_size',
+			// 		'field'           => 'slug',
+			// 		'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
+			// 		'operator'        => 'IN',
+			// 	),
+			// 	array(
+			// 		'taxonomy'        => 'pa_ratio',
+			// 		'field'           => 'slug',
+			// 		'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
+			// 		 'operator'        => 'IN',
+			// 	),
+			// );
+
+			$query['tax_query'] = $tax_query_arr;
 
         }
 
