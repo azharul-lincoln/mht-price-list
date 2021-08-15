@@ -52,61 +52,67 @@ class MHT_MasterPriceList {
             //     );
 
 
-			//print_r($query_vars['mht_custom_query_price_list']);
+			
 
-			$tax_query_arr = array(
-				'relation' => 'AND'
-			);
+            if(strpos($query_vars['mht_custom_query_price_list']['width'], 'r') !== false){
+                //print_r($query_vars['mht_custom_query_price_list']);
 
-			if(!empty($query_vars['mht_custom_query_price_list']['width'])){
-				$tax_query_arr[] =    array(
-					'taxonomy'        => 'pa_width',
-					'field'           => 'slug',
-					'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
-					'operator'        => 'IN',
-				);
-			}
+                $tax_query_arr = array(
+                    'relation' => 'AND'
+                );
+    
+    
+                if(!empty($query_vars['mht_custom_query_price_list']['width'])){
+                    $tax_query_arr[] =    array(
+                        'taxonomy'        => 'pa_width',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
+                        'operator'        => 'IN',
+                    );
+                }
+    
+                if(!empty($query_vars['mht_custom_query_price_list']['ratio'])){
+                    $tax_query_arr[] =    array(
+                        'taxonomy'        => 'pa_size',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
+                        'operator'        => 'IN',
+                    );
+                }
+    
+                if(!empty($query_vars['mht_custom_query_price_list']['rim'])){
+                    $tax_query_arr[] =    array(
+                        'taxonomy'        => 'pa_ratio',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
+                        'operator'        => 'IN',
+                    );
+                }
+            }else{
 
-			if(!empty($query_vars['mht_custom_query_price_list']['ratio'])){
-				$tax_query_arr[] =    array(
-					'taxonomy'        => 'pa_size',
-					'field'           => 'slug',
-					'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
-					'operator'        => 'IN',
-				);
-			}
+                $tax_query_arr = array(
+                    'relation' => 'AND',
+                    array(
+                        'taxonomy'        => 'pa_width',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
+                        'operator'        => 'IN',
+                    ),
+                    array(
+                        'taxonomy'        => 'pa_size',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
+                        'operator'        => 'IN',
+                    ),
+                    array(
+                        'taxonomy'        => 'pa_ratio',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
+                        'operator'        => 'IN',
+                    ),
+                );
 
-			if(!empty($query_vars['mht_custom_query_price_list']['rim'])){
-				$tax_query_arr[] =    array(
-					'taxonomy'        => 'pa_ratio',
-					'field'           => 'slug',
-					'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
-					'operator'        => 'IN',
-				);
-			}
-
-
-			// $query['tax_query'] = array(
-			// 	'relation' => 'AND',
-			// 	array(
-			// 		'taxonomy'        => 'pa_width',
-			// 		'field'           => 'slug',
-			// 		'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
-			// 		'operator'        => 'IN',
-			// 	),
-			// 	array(
-			// 		'taxonomy'        => 'pa_size',
-			// 		'field'           => 'slug',
-			// 		'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
-			// 		'operator'        => 'IN',
-			// 	),
-			// 	array(
-			// 		'taxonomy'        => 'pa_ratio',
-			// 		'field'           => 'slug',
-			// 		'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
-			// 		 'operator'        => 'IN',
-			// 	),
-			// );
+            }
 
 			$query['tax_query'] = $tax_query_arr;
 
