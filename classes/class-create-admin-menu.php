@@ -310,6 +310,26 @@ class AZ_MHT_Create_Admin_Page
 	}
 
 
+	function is_excluded_item($tire_size){
+		$items_to_exclude = [
+			'235/75R22.5',
+			'245/80R22.5',
+			'255/75R22.5',
+			'265/70R22.5',
+			'265/80R22.5',
+			'255/75R22.5',
+		];
+
+		foreach($items_to_exclude as $item){
+			if($item == $tire_size){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
 	function print_product_list_row($width, $ratio, $rim)
 	{
 		$MHT_MasterPriceList = new MHT_MasterPriceList();
@@ -323,6 +343,10 @@ class AZ_MHT_Create_Admin_Page
 		$tire_size = str_replace("-",".", $tire_size);
 		$tire_size = str_replace("r/","/", $tire_size);
 		$tire_size = strtoupper($tire_size);
+
+		if($this->is_excluded_item($tire_size)){
+			return;
+		}
 
 	?>
 
