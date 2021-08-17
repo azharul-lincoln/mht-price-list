@@ -5,6 +5,37 @@ class MHT_MasterPriceList {
 
     var $currency_symbol;
 
+	// 	Array
+	// (
+	//     [americus] => Americus
+	//     [bf-goodrich] => BF Goodrich
+	//     [boto] => Boto
+	//     [bridgestone] => Bridgestone
+	//     [continental] => Continental
+	//     [dayton] => Dayton
+	//     [firestone] => Firestone
+	//     [general] => General
+	//     [goodride] => Goodride
+	//     [goodyear] => Goodyear
+	//     [hankook] => Hankook
+	//     [hercules] => Hercules
+	//     [ironhead] => Ironhead
+	//     [ironman] => Ironman
+	//     [long-march] => Long March
+	//     [michelin] => Michelin
+	//     [roadlux] => Roadlux
+	//     [roadmaster] => Roadmaster
+	//     [samson] => Samson
+	//     [sumitomo] => Sumitomo
+	//     [supercargo] => Supercargo
+	//     [toyo] => Toyo
+	//     [uniroyal] => UniRoyal
+	//     [vitour] => Vitour
+	//     [wanli] => Wanli
+	//     [yokohama] => Yokohama
+	// )
+	var $brands_arr;
+
     function __construct()
     {
         $this->currency_symbol = '$';
@@ -12,13 +43,27 @@ class MHT_MasterPriceList {
 
     public function register_actions(){
         add_filter( 'woocommerce_product_data_store_cpt_get_products_query', [$this, 'handle_custom_query_var'], 10, 2 );
-        //add_action('template_redirect', [$this, 'test']);
+		add_action('init', [$this, 'set_brands_array'], 99);
+        add_action('template_redirect', [$this, 'test']);
     }
+
+	function set_brands_array(){
+		$brnds_array = [];
+		$brands = get_terms('yith_product_brand');
+
+		if(!empty($brands)){
+			foreach($brands as $brand ){
+				$brnds_array[$brand->slug] = $brand->name;
+			}
+		}
+		$this->brands_arr = $brnds_array;
+	}
 
     function test(){
         //255 75 22.5 shuld not reurn any item
         echo '<pre>';
-        print_r(count($this->get_producs_by_size( '12r', '', '22-5' )));
+        //print_r(count($this->get_producs_by_size( '12r', '', '22-5' )));
+        print_r($this->brands_arr);
         die();
     }
 
@@ -52,7 +97,7 @@ class MHT_MasterPriceList {
             //     );
 
 
-			
+
 
             if(strpos($query_vars['mht_custom_query_price_list']['width'], 'r') !== false){
                 //print_r($query_vars['mht_custom_query_price_list']);
@@ -60,8 +105,8 @@ class MHT_MasterPriceList {
                 $tax_query_arr = array(
                     'relation' => 'AND'
                 );
-    
-    
+
+
                 if(!empty($query_vars['mht_custom_query_price_list']['width'])){
                     $tax_query_arr[] =    array(
                         'taxonomy'        => 'pa_width',
@@ -70,7 +115,7 @@ class MHT_MasterPriceList {
                         'operator'        => 'IN',
                     );
                 }
-    
+
                 if(!empty($query_vars['mht_custom_query_price_list']['ratio'])){
                     $tax_query_arr[] =    array(
                         'taxonomy'        => 'pa_size',
@@ -79,7 +124,7 @@ class MHT_MasterPriceList {
                         'operator'        => 'IN',
                     );
                 }
-    
+
                 if(!empty($query_vars['mht_custom_query_price_list']['rim'])){
                     $tax_query_arr[] =    array(
                         'taxonomy'        => 'pa_ratio',
@@ -162,6 +207,11 @@ class MHT_MasterPriceList {
     }
 
 
+	function get_manufacturers_name_by_slug( $slug ) {
+
+	}
+
+
     public static function get_producs_by_size($width, $ratio, $rim ){
 
         $products = wc_get_products( array(
@@ -220,6 +270,11 @@ class MHT_MasterPriceList {
 			$product_edit_link = get_edit_post_link($product->get_id());
 			$product_title = $product->get_title();
 			$product_name = '<a href="'.$product_edit_link.'" target="_blank">'.$product_title.'</a>';
+			$product_menufacturar = get_the_terms( $product->get_id(), 'yith_product_brand');
+            echo '<pre>';
+			    print_r($product_menufacturar);
+            echo '</pre>';
+
             $product_item_arr = [
                 'produt_name' => $product_name,
                 'price' => $this->currency_symbol. $product->get_price(),
@@ -227,7 +282,8 @@ class MHT_MasterPriceList {
             ];
 
             if( empty($manufacturers[$manufacturer_id]['name'] )) {
-                $manufacturers[$manufacturer_id]['name'] =  $this->get_manufacturer_name_by_index($manufacturer_id);
+                //$manufacturers[$manufacturer_id]['name'] =  $this->get_manufacturer_name_by_index($manufacturer_id);
+                $manufacturers[$manufacturer_id]['name'] =  $product_menufacturar[0]->name;
             }
 
            if( empty($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ]) ) {
