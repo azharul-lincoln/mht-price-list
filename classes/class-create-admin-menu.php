@@ -27,7 +27,7 @@ class AZ_MHT_Create_Admin_Page
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
-		add_action('init', [$this, 'set_attributes']);
+		add_action('init', [$this, 'set_attributes'], 88);
 		//add_action('init', [$this, 'test'], 99);
 	}
 
