@@ -28,9 +28,14 @@ class AZ_MHT_Create_Admin_Page
 		$MHT_MasterPriceList = new MHT_MasterPriceList();
 		$tire_size_item_arrayes = [];
 
-		foreach($this->widths as $key_width => $width ){
-			foreach($this->ratios as $key_ration => $ratio ){
-				foreach($this->sizes as $key_size => $size ){
+        $widths = $this->get_terms('pa_width');
+		$sizes = $this->get_terms('pa_ratio');
+		$ratios = $this->get_terms('pa_size');
+		$ratios[]= '';
+
+		foreach($widths as $key_width => $width ){
+			foreach($ratios as $key_ration => $ratio ){
+				foreach($sizes as $key_size => $size ){
 					//$this->print_product_list_row($width, $ratio, $size); //loop
 					$tire_size_item_arr = $MHT_MasterPriceList->tire_size_item_arr($width, $ratio, $size);
 
@@ -41,6 +46,8 @@ class AZ_MHT_Create_Admin_Page
 			}
 		}
 
+        //return $this->get_terms('pa_width');
+
 		return $tire_size_item_arrayes;
 	}
 
@@ -48,7 +55,7 @@ class AZ_MHT_Create_Admin_Page
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
-		add_action('init', [$this, 'set_attributes'], 88);
+		add_action('init', [$this, 'set_attributes'], 99);
 		//add_action('init', [$this, 'test'], 99);
 	}
 
@@ -350,24 +357,24 @@ class AZ_MHT_Create_Admin_Page
 	}
 
 
-	function is_excluded_item($tire_size){
-		$items_to_exclude = [
-			'235/75R22.5',
-			'245/80R22.5',
-			'255/75R22.5',
-			'265/70R22.5',
-			'265/80R22.5',
-			'255/75R22.5',
-		];
+	// function is_excluded_item($tire_size){
+	// 	$items_to_exclude = [
+	// 		'235/75R22.5',
+	// 		'245/80R22.5',
+	// 		'255/75R22.5',
+	// 		'265/70R22.5',
+	// 		'265/80R22.5',
+	// 		'255/75R22.5',
+	// 	];
 
-		foreach($items_to_exclude as $item){
-			if($item == $tire_size){
-				return true;
-			}
-		}
+	// 	foreach($items_to_exclude as $item){
+	// 		if($item == $tire_size){
+	// 			return true;
+	// 		}
+	// 	}
 
-		return false;
-	}
+	// 	return false;
+	// }
 
 
 	function print_product_list_row($width, $ratio, $rim)
@@ -380,13 +387,13 @@ class AZ_MHT_Create_Admin_Page
         }
 
 		$tire_size = $tire_size_item_arr['tire_size'];
-		$tire_size = str_replace("-",".", $tire_size);
-		$tire_size = str_replace("r/","/", $tire_size);
-		$tire_size = strtoupper($tire_size);
+		// $tire_size = str_replace("-",".", $tire_size);
+		// $tire_size = str_replace("r/","/", $tire_size);
+		// $tire_size = strtoupper($tire_size);
 
-		if($this->is_excluded_item($tire_size)){
-			return;
-		}
+		// if($this->is_excluded_item($tire_size)){
+		// 	return;
+		// }
 
 	?>
 
