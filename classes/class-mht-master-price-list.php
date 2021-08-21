@@ -5,6 +5,37 @@ class MHT_MasterPriceList {
 
     var $currency_symbol;
 
+	// 	Array
+	// (
+	//     [americus] => Americus
+	//     [bf-goodrich] => BF Goodrich
+	//     [boto] => Boto
+	//     [bridgestone] => Bridgestone
+	//     [continental] => Continental
+	//     [dayton] => Dayton
+	//     [firestone] => Firestone
+	//     [general] => General
+	//     [goodride] => Goodride
+	//     [goodyear] => Goodyear
+	//     [hankook] => Hankook
+	//     [hercules] => Hercules
+	//     [ironhead] => Ironhead
+	//     [ironman] => Ironman
+	//     [long-march] => Long March
+	//     [michelin] => Michelin
+	//     [roadlux] => Roadlux
+	//     [roadmaster] => Roadmaster
+	//     [samson] => Samson
+	//     [sumitomo] => Sumitomo
+	//     [supercargo] => Supercargo
+	//     [toyo] => Toyo
+	//     [uniroyal] => UniRoyal
+	//     [vitour] => Vitour
+	//     [wanli] => Wanli
+	//     [yokohama] => Yokohama
+	// )
+	var $brands_arr;
+
     function __construct()
     {
         $this->currency_symbol = '$';
@@ -12,13 +43,27 @@ class MHT_MasterPriceList {
 
     public function register_actions(){
         add_filter( 'woocommerce_product_data_store_cpt_get_products_query', [$this, 'handle_custom_query_var'], 10, 2 );
-       // add_action('template_redirect', [$this, 'test']);
+		//add_action('init', [$this, 'set_brands_array'], 99);
+        //add_action('template_redirect', [$this, 'test']);
     }
+
+	function set_brands_array(){
+		$brnds_array = [];
+		$brands = get_terms('yith_product_brand');
+
+		if(!empty($brands)){
+			foreach($brands as $brand ){
+				$brnds_array[$brand->slug] = $brand->name;
+			}
+		}
+		$this->brands_arr = $brnds_array;
+	}
 
     function test(){
         //255 75 22.5 shuld not reurn any item
         echo '<pre>';
-        print_r($this->tire_size_item_arr( '245', '75', '22.5' ));
+        print_r( $this->tire_size_item_arr('12r', '', '22-5') );
+        //print_r($this->brands_arr);
         die();
     }
 
@@ -52,27 +97,67 @@ class MHT_MasterPriceList {
             //     );
 
 
-			$query['tax_query'] = array(
-				'relation' => 'AND',
-				array(
-					'taxonomy'        => 'pa_width',
-					'field'           => 'slug',
-					'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
-					'operator'        => 'IN',
-				),
-				array(
-					'taxonomy'        => 'pa_size',
-					'field'           => 'slug',
-					'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
-					'operator'        => 'IN',
-				),
-				array(
-					'taxonomy'        => 'pa_ratio',
-					'field'           => 'slug',
-					'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
-					 'operator'        => 'IN',
-				),
-			);
+            if(strpos($query_vars['mht_custom_query_price_list']['width'], 'r') !== false){
+                //print_r($query_vars['mht_custom_query_price_list']);
+
+                $tax_query_arr = array(
+                    'relation' => 'AND'
+                );
+
+
+                if(!empty($query_vars['mht_custom_query_price_list']['width'])){
+                    $tax_query_arr[] =    array(
+                        'taxonomy'        => 'pa_width',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
+                        'operator'        => 'IN',
+                    );
+                }
+
+                if(!empty($query_vars['mht_custom_query_price_list']['ratio'])){
+                    $tax_query_arr[] =    array(
+                        'taxonomy'        => 'pa_size',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
+                        'operator'        => 'IN',
+                    );
+                }
+
+                if(!empty($query_vars['mht_custom_query_price_list']['rim'])){
+                    $tax_query_arr[] =    array(
+                        'taxonomy'        => 'pa_ratio',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
+                        'operator'        => 'IN',
+                    );
+                }
+            }else{
+
+                $tax_query_arr = array(
+                    'relation' => 'AND',
+                    array(
+                        'taxonomy'        => 'pa_width',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['width'],
+                        'operator'        => 'IN',
+                    ),
+                    array(
+                        'taxonomy'        => 'pa_size',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['ratio'],
+                        'operator'        => 'IN',
+                    ),
+                    array(
+                        'taxonomy'        => 'pa_ratio',
+                        'field'           => 'slug',
+                        'terms'           =>  $query_vars['mht_custom_query_price_list']['rim'],
+                        'operator'        => 'IN',
+                    ),
+                );
+
+            }
+
+			$query['tax_query'] = $tax_query_arr;
 
         }
 
@@ -166,6 +251,19 @@ class MHT_MasterPriceList {
 
     }
 
+	function get_menufacturars_by_product_id($product_id){
+		$menufacturars_arr = [];
+		$menufacturars = get_the_terms( $product_id, 'yith_product_brand');
+
+		if(!empty($menufacturars)){
+			foreach($menufacturars as $menufacturar){
+				$menufacturars_arr[$menufacturar->slug] = $menufacturar->name;
+			}
+		}
+
+		return $menufacturars_arr;
+	}
+
 
     public function get_manufacturers_arr($products){
         //echo count($products);
@@ -173,26 +271,51 @@ class MHT_MasterPriceList {
 
         foreach($products as $product){
             $manufacturer_id = get_post_meta($product->get_id(), 'tyerBrand', true);
-            $tire_set_number = get_post_meta($product->get_id(), 'number_selling_tires', true);
+            $tire_set_number = get_post_meta($product->get_id(), 'number_selling_tires', true); // 2, 4, 6 or 8
 
 			$product_edit_link = get_edit_post_link($product->get_id());
 			$product_title = $product->get_title();
 			$product_name = '<a href="'.$product_edit_link.'" target="_blank">'.$product_title.'</a>';
+
+			// Array
+			// (
+			// 	[firestone] => Firestone
+			//  [americus] => Americus
+			// )
+			$product_menufacturars = $this->get_menufacturars_by_product_id( $product->get_id() );
+
             $product_item_arr = [
                 'produt_name' => $product_name,
-                'price' => $this->currency_symbol. $product->get_price(),
+                'price' => !empty($product->get_price()) ? $this->currency_symbol. $product->get_price() : '',
                 'qty'   => $product->get_stock_quantity()
             ];
 
-            if( empty($manufacturers[$manufacturer_id]['name'] )) {
-                $manufacturers[$manufacturer_id]['name'] =  $this->get_manufacturer_name_by_index($manufacturer_id);
-            }
+			if(!empty($product_menufacturars)){
+				foreach($product_menufacturars  as $key => $product_menufacturar ){
+					if( empty($manufacturers[$key]['name'] )) {
+						//$manufacturers[$manufacturer_id]['name'] =  $this->get_manufacturer_name_by_index($manufacturer_id);
+						$manufacturers[$key]['name'] =  $product_menufacturar;
+					}
 
-           if( empty($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ]) ) {
-            $manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ] = [];
-           }
+					if( empty($manufacturers[$key][ $tire_set_number . '_tire_set' ]) ) {
+						$manufacturers[$key][ $tire_set_number . '_tire_set' ] = [];
+					}
 
-            array_push($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ], $product_item_arr);
+					array_push($manufacturers[$key][ $tire_set_number . '_tire_set' ], $product_item_arr);
+				}
+			}
+
+
+        //     if( empty($manufacturers[$manufacturer_id]['name'] )) {
+        //         //$manufacturers[$manufacturer_id]['name'] =  $this->get_manufacturer_name_by_index($manufacturer_id);
+        //         $manufacturers[$manufacturer_id]['name'] =  $product_menufacturar[0]->name;
+        //     }
+
+        //    if( empty($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ]) ) {
+        //     $manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ] = [];
+        //    }
+
+        //    array_push($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ], $product_item_arr);
 
         }
 

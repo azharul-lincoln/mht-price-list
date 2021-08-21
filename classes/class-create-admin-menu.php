@@ -7,16 +7,16 @@
 class AZ_MHT_Create_Admin_Page
 {
 
-	public $widths = ['12', '12R', '11R', '19.5', '215', '225', '235', '245', '255', '265', '275', '285', '295', '305', '315', '445', '8', '8R'];
+	public $widths = [];
 
-	public $ratios = ['36.00', '40.00', '65', '70', '75', '80'];
+	public $ratios = [];
 
-	public $sizes = ['1', '17.5', '19.5', '22.5', '24.5', '245', '51', '57'];
+	public $sizes = [];
 
 	public function print_all_items_body(){
-		foreach($this->widths as $key_width => $width ){
-			foreach($this->ratios as $key_ration => $ratio ){
-				foreach($this->sizes as $key_size => $size ){
+		foreach($this->widths as $width ){
+			foreach($this->ratios as $ratio ){
+				foreach($this->sizes as $size ){
 					$this->print_product_list_row($width, $ratio, $size); //loop
 				}
 			}
@@ -48,12 +48,57 @@ class AZ_MHT_Create_Admin_Page
 	public function __construct()
 	{
 		add_action('admin_menu', [$this, 'create_admin_menu']);
-		//add_action('template_redirect', [$this, 'test']);
+		add_action('init', [$this, 'set_attributes'], 88);
+		//add_action('init', [$this, 'test'], 99);
 	}
 
+	function set_attributes(){
+		$this->widths = $this->get_terms('pa_width');
+		$this->sizes = $this->get_terms('pa_ratio');
+		$this->ratios = $this->get_terms('pa_size');
+		$this->ratios[]= '';
+	}
 
-	public function test(){
-		print_r($this->all_products_body_arr());
+	function get_terms($texenomy){
+		$tex_arr = [];
+		$terms = get_terms(
+			[
+				'taxonomy' => $texenomy,
+				'hide_empty' => true,
+			]
+			);
+
+			if(!empty($terms)){
+				foreach($terms as $term) {
+					$tex_arr[] = $term->slug;
+				}
+			}
+
+			return $tex_arr;
+	}
+
+	function test() {
+		// $width_arr = [];
+		// $widths = get_terms(
+		// 	[
+		// 		//'taxonomy' => 'pa_width',
+		// 		//'taxonomy' => 'pa_ratio',
+		// 		'taxonomy' => 'pa_size',
+		// 		'hide_empty' => true,
+		// 	]
+		// 	);
+
+		// if(!empty($widths)){
+		// 	foreach($widths as $width) {
+		// 		$width_arr[] = $width->slug;
+		// 	}
+		// }
+
+		 	echo '<pre>';
+		// 	print_r($width_arr);
+
+		print_r([$this->widths, $this->sizes, $this->ratios]);
+
 		die();
 	}
 
@@ -305,6 +350,26 @@ class AZ_MHT_Create_Admin_Page
 	}
 
 
+	function is_excluded_item($tire_size){
+		$items_to_exclude = [
+			'235/75R22.5',
+			'245/80R22.5',
+			'255/75R22.5',
+			'265/70R22.5',
+			'265/80R22.5',
+			'255/75R22.5',
+		];
+
+		foreach($items_to_exclude as $item){
+			if($item == $tire_size){
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
 	function print_product_list_row($width, $ratio, $rim)
 	{
 		$MHT_MasterPriceList = new MHT_MasterPriceList();
@@ -313,11 +378,21 @@ class AZ_MHT_Create_Admin_Page
         if(empty($tire_size_item_arr['manufacturers'])){
             return;
         }
+
+		$tire_size = $tire_size_item_arr['tire_size'];
+		$tire_size = str_replace("-",".", $tire_size);
+		$tire_size = str_replace("r/","/", $tire_size);
+		$tire_size = strtoupper($tire_size);
+
+		if($this->is_excluded_item($tire_size)){
+			return;
+		}
+
 	?>
 
 <div class="mht-plist-row">
     <div class="tire-size plist-row-item">
-        <h3><?php echo $tire_size_item_arr['tire_size'] ?></h3>
+        <h3><?php echo $tire_size; ?></h3>
     </div>
 
     <div class="tire-detail-container plist-row-item">
