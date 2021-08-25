@@ -3,7 +3,7 @@ import PriceListRow from "./PriceListRow";
 
 const Body = () => {
   const products = appLocalizer.products;
-  //console.log(products);
+  console.log(products);
   return (
     <React.Fragment>
       {products.map((product) => (
