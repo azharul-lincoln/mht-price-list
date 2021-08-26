@@ -58,10 +58,35 @@
     .tire-size {
       flex: 1;
       border-right: 1px solid #ddd;
-
+      max-width: 200px;
+      min-width: 200px;
       h3 {
         color: #795548;
         font-size: 22px;
+      }
+    }
+
+    .tire-manufacturer {
+      max-width: 150px;
+      min-width: 150px;
+    }
+
+    .tire-cost {
+      max-width: 150px;
+      min-width: 150px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .cost-input-container {
+        span.dolar {
+          font-weight: bold;
+        }
+        input {
+          max-width: 120px;
+        }
       }
     }
 

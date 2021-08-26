@@ -12,6 +12,10 @@ export const Header = () => {
             <h3>Manufacturer</h3>
           </div>
 
+          <div className="tire-cost tire-set-item">
+            <h3>Cost</h3>
+          </div>
+
           <div className="tire-set-item">
             <div className="titel">
               <h3>2 tire set</h3>
