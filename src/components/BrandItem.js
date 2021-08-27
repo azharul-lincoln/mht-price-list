@@ -29,7 +29,7 @@ const BrandItem = ({ item }) => {
       <div className="tire-cost tire-set-item">
         <div className="cost-input-container">
           <span className="dolar">$</span>
-          <input type="number" placeholder="Tire Cost" defaultValue="99" />
+          <input type="number" placeholder="Tire Cost" defaultValue="999" />
         </div>
       </div>
 
