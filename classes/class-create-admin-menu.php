@@ -147,7 +147,7 @@ class AZ_MHT_Create_Admin_Page
 	public function enqueue_admin_css()
 	{
 		// Isn't it nice to use dependencies and the already registered core js files?
-		wp_enqueue_style('mht-plist-css', MHT_PLIST_URL . '/assets/mht-plist.css', array(), wp_rand());
+		wp_enqueue_style('mht-plist-css', MHT_PLIST_URL . 'assets/mht-plist.css', array(), wp_rand());
 	}
 
 
