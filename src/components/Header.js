@@ -20,21 +20,11 @@ export const Header = () => {
             <div className="titel">
               <h3>2 tire set</h3>
             </div>
-            <div className="pdetail-headings">
-              <div className="product-name">Product name</div>
-              <div className="product-price">Price</div>
-              <div className="product-quentatty">Qty</div>
-            </div>
           </div>
 
           <div className="tire-set-item">
             <div className="titel">
               <h3>4 tire set</h3>
-            </div>
-            <div className="pdetail-headings">
-              <div className="product-name">Product name</div>
-              <div className="product-price">Price</div>
-              <div className="product-quentatty">Qty</div>
             </div>
           </div>
 
@@ -42,21 +32,11 @@ export const Header = () => {
             <div className="titel">
               <h3>6 tire set</h3>
             </div>
-            <div className="pdetail-headings">
-              <div className="product-name">Product name</div>
-              <div className="product-price">Price</div>
-              <div className="product-quentatty">Qty</div>
-            </div>
           </div>
 
           <div className="tire-set-item">
             <div className="titel">
               <h3>8 tire set</h3>
-            </div>
-            <div className="pdetail-headings">
-              <div className="product-name">Product name</div>
-              <div className="product-price">Price</div>
-              <div className="product-quentatty">Qty</div>
             </div>
           </div>
         </div>

@@ -5,24 +5,67 @@ export default function ProductDetails({ product }) {
   return (
     <React.Fragment>
       <div className="product-detail-container">
-        <div className="product-name">Total Tire Cost</div>
-        <div className="product-price">Installation</div>
-        <div className="product-quentatty">Freight</div>
-        <div className="product-quentatty">CC Charge</div>
-      </div>
+        <div className="product-name product-grid-item">
+          {parse(product.produt_name)}
+        </div>
 
-      <div className="product-detail-container">
-        <div className="product-name">$888</div>
-        <div className="product-price">$333</div>
-        <div className="product-quentatty">$250</div>
-        <div className="product-quentatty">$60</div>
-      </div>
+        <div className="product-detail product-grid-item">
+          <div className="product-detail-item">
+            <div className="item-lavel">
+              <p>Total Tire Cost: </p>
+            </div>
+            <div className="item-amount">
+              <p>$454</p>
+            </div>
+          </div>
 
-      <div className="product-detail-container">
-        <div className="product-name">{parse(product.produt_name)}</div>
-        <div className="product-price">{product.price}</div>
-        <div className="product-quentatty">{product.qty}</div>
-        <div className="product-quentatty">$60</div>
+          <div className="product-detail-item">
+            <div className="item-lavel">
+              <p>Installation: </p>
+            </div>
+            <div className="item-amount">
+              <p>$333</p>
+            </div>
+          </div>
+
+          <div className="product-detail-item">
+            <div className="item-lavel">
+              <p>Freight:</p>
+            </div>
+            <div className="item-amount">
+              <p>$250</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="product-detail product-grid-item">
+          <div className="product-detail-item">
+            <div className="item-lavel">
+              <p>Web Price:</p>
+            </div>
+            <div className="item-amount">
+              <p>{product.price}</p>
+            </div>
+          </div>
+
+          <div className="product-detail-item">
+            <div className="item-lavel">
+              <p>Total Cost:</p>
+            </div>
+            <div className="item-amount">
+              <p>$3456</p>
+            </div>
+          </div>
+
+          <div className="product-detail-item profit">
+            <div className="item-lavel">
+              <p>Profit:</p>
+            </div>
+            <div className="item-amount">
+              <p>$500</p>
+            </div>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );
