@@ -44,7 +44,9 @@
 
 .wrap .mht-price-list {
   background-color: #fff;
-  width: 100%;
+  max-height: 90vh;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 .wrap .mht-price-list .mht-plist-row {
@@ -72,6 +74,12 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  min-width: 600px;
+}
+
+.wrap .mht-price-list .mht-plist-row.plist-header .plist-row-item .tire-set-item.tire-manufacturer, .wrap .mht-price-list .mht-plist-row.plist-header .plist-row-item .tire-set-item.tire-cost {
+  max-width: 150px;
+  min-width: 150px;
 }
 
 .wrap .mht-price-list .mht-plist-row.plist-header .plist-row-item .tire-set-item .pdetail-headings {
@@ -333,6 +341,7 @@
           justify-content: center;
   border-right: 1px solid #ccc;
   height: auto;
+  width: 600px;
 }
 
 .wrap .mht-price-list .mht-plist-row.plist-header {

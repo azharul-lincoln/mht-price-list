@@ -5,66 +5,32 @@ export default function ProductDetails({ product }) {
   return (
     <React.Fragment>
       <div className="product-detail-container">
-        <div className="product-name product-grid-item">
-          {parse(product.produt_name)}
+        <div className="product-name">{parse(product.produt_name)}</div>
+        <div className="tire-cost">
+          Tire <br />
+          Cost
         </div>
-
-        <div className="product-detail product-grid-item">
-          <div className="product-detail-item">
-            <div className="item-lavel">
-              <p>Total Tire Cost: </p>
-            </div>
-            <div className="item-amount">
-              <p>$454</p>
-            </div>
-          </div>
-
-          <div className="product-detail-item">
-            <div className="item-lavel">
-              <p>Installation: </p>
-            </div>
-            <div className="item-amount">
-              <p>$333</p>
-            </div>
-          </div>
-
-          <div className="product-detail-item">
-            <div className="item-lavel">
-              <p>Freight:</p>
-            </div>
-            <div className="item-amount">
-              <p>$250</p>
-            </div>
-          </div>
+        <div className="installation">
+          Installation <br /> Freight
         </div>
-
-        <div className="product-detail product-grid-item">
-          <div className="product-detail-item">
-            <div className="item-lavel">
-              <p>Web Price:</p>
-            </div>
-            <div className="item-amount">
-              <p>{product.price}</p>
-            </div>
-          </div>
-
-          <div className="product-detail-item">
-            <div className="item-lavel">
-              <p>Total Cost:</p>
-            </div>
-            <div className="item-amount">
-              <p>$3456</p>
-            </div>
-          </div>
-
-          <div className="product-detail-item profit">
-            <div className="item-lavel">
-              <p>Profit:</p>
-            </div>
-            <div className="item-amount">
-              <p>$500</p>
-            </div>
-          </div>
+        <div className="cc">
+          Credit <br />
+          Card
+        </div>
+        <div className="total-cost">
+          TOtal
+          <br />
+          Cost
+        </div>
+        <div className="product-price">
+          Selling
+          <br />
+          Price
+        </div>
+        <div className="profit">
+          Gross
+          <br />
+          Profit
         </div>
       </div>
     </React.Fragment>
