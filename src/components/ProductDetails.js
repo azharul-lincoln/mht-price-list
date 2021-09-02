@@ -5,32 +5,37 @@ export default function ProductDetails({ product }) {
   return (
     <React.Fragment>
       <div className="product-detail-container">
-        <div className="product-name">{parse(product.produt_name)}</div>
-        <div className="tire-cost">
-          Tire <br />
-          Cost
+        <div className="product-name">
+          {parse(
+            product.produt_name.replace(
+              "<br>Free On-Site Mobile Installation",
+              ""
+            )
+          )}
+        </div>
+        <div className="t-cost">
+          <div className="label">TiCost</div>
+          <div className="value">$3333</div>
         </div>
         <div className="installation">
-          Installation <br /> Freight
+          <div className="label">IF</div>
+          <div className="value">$3333</div>
         </div>
         <div className="cc">
-          Credit <br />
-          Card
+          <div className="label">CC</div>
+          <div className="value">$3333</div>
         </div>
         <div className="total-cost">
-          TOtal
-          <br />
-          Cost
+          <div className="label">ToCost</div>
+          <div className="value">$3333</div>
         </div>
         <div className="product-price">
-          Selling
-          <br />
-          Price
+          <div className="label">SPrice</div>
+          <div className="value">$3333</div>
         </div>
         <div className="profit">
-          Gross
-          <br />
-          Profit
+          <div className="label">Profit</div>
+          <div className="value">$3333</div>
         </div>
       </div>
     </React.Fragment>

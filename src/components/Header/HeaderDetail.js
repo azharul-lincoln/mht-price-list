@@ -2,9 +2,9 @@ import React from "react";
 
 function HeaderDetail() {
   return (
-    <div className="pdetail-headings">
+    <div className="product-detail-container pdetail-headings">
       <div className="product-name">Product name</div>
-      <div className="tire-cost">
+      <div className="t-cost">
         Tire <br />
         Cost
       </div>

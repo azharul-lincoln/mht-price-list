@@ -332,19 +332,6 @@ class MHT_MasterPriceList {
 					array_push($manufacturers[$key][ $tire_set_number . '_tire_set' ], $product_item_arr);
 				}
 			}
-
-
-        //     if( empty($manufacturers[$manufacturer_id]['name'] )) {
-        //         //$manufacturers[$manufacturer_id]['name'] =  $this->get_manufacturer_name_by_index($manufacturer_id);
-        //         $manufacturers[$manufacturer_id]['name'] =  $product_menufacturar[0]->name;
-        //     }
-
-        //    if( empty($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ]) ) {
-        //     $manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ] = [];
-        //    }
-
-        //    array_push($manufacturers[$manufacturer_id][ $tire_set_number . '_tire_set' ], $product_item_arr);
-
         }
 
         return $manufacturers;

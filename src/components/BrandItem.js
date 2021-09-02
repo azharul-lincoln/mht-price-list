@@ -2,8 +2,6 @@ import React from "react";
 import { SetItems } from "./SetItems";
 
 const BrandItem = ({ item }) => {
-  console.log(item);
-
   if (!("2_tire_set" in item)) {
     item["2_tire_set"] = [];
   }
