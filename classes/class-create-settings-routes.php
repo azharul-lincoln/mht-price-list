@@ -19,7 +19,31 @@ class WP_React_Settings_Rest_Route {
             'callback' => [ $this, 'save_settings' ],
             'permission_callback' => [ $this, 'save_settings_permission' ]
         ] );
+
+
+
+		register_rest_route( 'mpl/v1', '/settings', [
+            'methods' => 'GET',
+            'callback' => [ $this, 'get_mpl_settings' ],
+            'permission_callback' => [ $this, 'get_settings_permission' ]
+        ] );
+        register_rest_route( 'mpl/v1', '/settings', [
+            'methods' => 'POST',
+            'callback' => [ $this, 'save_mpl_settings' ],
+            'permission_callback' => [ $this, 'save_settings_permission' ]
+        ] );
+
     }
+
+
+	public function get_mpl_settings(){
+		$products = get_option( 'mht_mpl_products' );
+		$response = [
+            'products' => $products,
+        ];
+
+        return rest_ensure_response( $response );
+	}
 
     public function get_settings() {
         $firstname = get_option( 'wprk_settings_firstname' );
@@ -37,6 +61,14 @@ class WP_React_Settings_Rest_Route {
     public function get_settings_permission() {
         return true;
     }
+
+
+
+	public function save_mpl_settings( $req ){
+		$products = sanitize_text_field( $req['products'] );
+		update_option( 'mht_mpl_products', $products );
+		return rest_ensure_response( 'success' );
+	}
 
     public function save_settings( $req ) {
         $firstname = sanitize_text_field( $req['firstname'] );

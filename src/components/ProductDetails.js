@@ -15,27 +15,27 @@ export default function ProductDetails({ product }) {
         </div>
         <div className="t-cost">
           <div className="label">TiCost</div>
-          <div className="value">$3333</div>
+          <div className="value">$45</div>
         </div>
         <div className="installation">
           <div className="label">IF</div>
-          <div className="value">$3333</div>
+          <div className="value">$657</div>
         </div>
         <div className="cc">
           <div className="label">CC</div>
-          <div className="value">$3333</div>
+          <div className="value">$995</div>
         </div>
         <div className="total-cost">
           <div className="label">ToCost</div>
-          <div className="value">$3333</div>
+          <div className="value">$834</div>
         </div>
         <div className="product-price">
           <div className="label">SPrice</div>
-          <div className="value">$3333</div>
+          <div className="value">$345</div>
         </div>
         <div className="profit">
           <div className="label">Profit</div>
-          <div className="value">$3333</div>
+          <div className="value">$37</div>
         </div>
       </div>
     </React.Fragment>
