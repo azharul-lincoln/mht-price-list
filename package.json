@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
+    "@yisheng90/react-loading": "^1.4.4",
     "axios": "^0.21.1",
     "html-react-parser": "^1.2.8",
     "react": "^16.7.0",
