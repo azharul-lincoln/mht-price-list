@@ -31,6 +31,7 @@ function load_scripts() {
     wp_localize_script( 'mht-master-price-list-js', 'appLocalizer', [
         'apiUrl' => home_url( '/wp-json' ),
 		'products' => $AZ_MHT_Create_Admin_Page->all_products_body_arr(),
+        'products_json' => json_encode($AZ_MHT_Create_Admin_Page->all_products_body_arr()),
         'nonce' => wp_create_nonce( 'wp_rest' ),
     ] );
 }

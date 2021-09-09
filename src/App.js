@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
-import Skeleton from "@yisheng90/react-loading";
 import axios from "axios";
+//import create from "zustand";
 
+// import { useMplStore } from "./components/Store/useMplStore";
 import { Header } from "./components/Header/Header";
 import Body from "./components/Body";
 import HeaderTop from "./components/Header/HeaderTop";
+import Loader from "./components/Loading/Loader";
 
-function getCostBySize(products) {
-  let newProducts = [];
+// const CostByManufacsTireSizeContext = React.createContext();
+const ProductContext = React.createContext();
+const GlobalCostingContext = React.createContext();
+
+function getCostBySizeFromWpProducts(products) {
+  let costBySizeFromWpProducts = [];
 
   products.forEach((product) => {
     //console.log(product);
     const { tire_size, manufacturers } = product;
 
     const manKeyes = Object.keys(manufacturers);
-    let newProduct = [];
-    newProduct["tire_size"] = tire_size;
-    newProduct["id"] = tire_size.replace(/\W/g, "_");
-    newProduct["cost_by_manufacturers"] = [];
+
+    let newProduct = {};
+    newProduct.id = tire_size.replace(/\W/g, "_");
+    newProduct.tire_size = tire_size;
+    newProduct.cost_by_manufacturers = [];
 
     manKeyes.forEach((key, index) => {
       if (!manufacturers[key].hasOwnProperty("cost")) {
@@ -29,36 +36,96 @@ function getCostBySize(products) {
       });
       //console.log(key, manufacturers[key], tire_size);
     });
-    newProducts.push(newProduct);
+    costBySizeFromWpProducts.push(newProduct);
   });
 
-  console.log("newProducts:", newProducts);
-  return newProducts;
+  //console.log("newProducts:", costBySizeFromWpProducts);
+  return costBySizeFromWpProducts;
 }
 
 function App() {
-  const [costsByTireSize, setCostsByTireSize] = useState();
-  const [changes, setChanges] = useState("Save Changes");
+  //console.log(appLocalizer.products);
+  const [products, setProducts] = useState(appLocalizer.products);
+  const [costByManufacsTireSize, setCostByManufacsTireSize] =
+    useState(undefined);
+
+  const defaultGlobalCosting = {
+    twoTireSet: {
+      ic: 300,
+      fc: 150,
+      cc: 2.5,
+    },
+    fourTireSet: {
+      ic: 450,
+      fc: 200,
+      cc: 2.5,
+    },
+    sixTireSet: {
+      ic: 650,
+      fc: 250,
+      cc: 2.5,
+    },
+    eightTireSet: {
+      ic: 800,
+      fc: 350,
+      cc: 2.5,
+    },
+  };
+
+  const [globalCosting, setGlobalCosting] = useState(undefined);
 
   const url = `${appLocalizer.apiUrl}/mpl/v1/settings`;
 
-  useEffect(() => {
+  const getGlobalCostingFromServer = async () => {
     axios.get(url).then((res) => {
-      // setFirstName( res.data.firstname );
-      // setLastName( res.data.lastname );
-      // setEmail( res.data.email );
-      console.log("res", res);
-
-      if (res.data.products == false) {
-        console.log("empty products");
-
-        const product_to_send_wp = JSON.stringify(products);
-
+      if (res.data.global_costing == false) {
+        const initilaiseGlobalCosting = JSON.stringify(defaultGlobalCosting);
         axios
           .post(
             url,
             {
-              products: product_to_send_wp,
+              global_costing_asumption: initilaiseGlobalCosting,
+            },
+            {
+              headers: {
+                "content-type": "application/json",
+                "X-WP-NONCE": appLocalizer.nonce,
+              },
+            }
+          )
+          .then((res) => {
+            if (res.data == "success") {
+              axios.get(url).then((serverResponse) => {
+                console.log(serverResponse);
+                const processJsondata = JSON.parse(
+                  serverResponse.data.global_costing
+                );
+                console.log(`processJsondataGC`, processJsondata);
+                setGlobalCosting(processJsondata);
+                //return processJsondata;
+              });
+            }
+          });
+      } else {
+        setGlobalCosting(JSON.parse(res.data.global_costing));
+      }
+    });
+  };
+
+  const calculateCostByManufacsTireSize = async (products) => {
+    axios.get(url).then((res) => {
+      console.log("res", res);
+      if (res.data.cost_by_manufacs_tire_size == false) {
+        console.log("empty products");
+
+        const product_to_send_wp = JSON.stringify(
+          getCostBySizeFromWpProducts(products)
+        );
+        axios
+          .post(
+            url,
+            {
+              cost_by_manufacs_tire_size: product_to_send_wp,
             },
             {
               headers: {
@@ -70,34 +137,52 @@ function App() {
           .then((res) => {
             //setLoader("Save Settings");
             console.log("settigs updated!", res);
+            if (res.data == "success") {
+              axios.get(url).then((serverResponse) => {
+                console.log(serverResponse);
+                const processJsondata = JSON.parse(
+                  serverResponse.data.cost_by_manufacs_tire_size
+                );
+                console.log(`processJsondata`, processJsondata);
+                setCostByManufacsTireSize(processJsondata);
+                //return processJsondata;
+              });
+            }
           });
       } else {
-        let testProducts = JSON.parse(res.data.products);
-        console.log("testProducts", testProducts);
+        console.log(`data was already there!`);
+        //return JSON.parse(res.data.cost_by_manufacs_tire_size);
+        setCostByManufacsTireSize(
+          JSON.parse(res.data.cost_by_manufacs_tire_size)
+        );
       }
     });
+  };
+
+  useEffect(() => {
+    //calculateCostByManufacsTireSize(products);
+    getGlobalCostingFromServer();
   }, []);
 
-  const products = appLocalizer.products;
-  //console.log(products);
+  if (globalCosting !== undefined) {
+    return (
+      <GlobalCostingContext.Provider
+        value={{ globalCosting, setGlobalCosting }}
+      >
+        <ProductContext.Provider value={{ products, setProducts }}>
+          <React.Fragment>
+            <HeaderTop />
+            <div className="mht-price-list">
+              <Header />
+              <Body />
+            </div>
+          </React.Fragment>
+        </ProductContext.Provider>
+      </GlobalCostingContext.Provider>
+    );
+  }
 
-  const costBySize = getCostBySize(products);
-
-  console.log("CP", costBySize);
-
-  return (
-    <React.Fragment>
-      <HeaderTop />
-      <div className="mht-price-list">
-        <Header />
-        <Body products={products} />
-      </div>
-    </React.Fragment>
-
-    // <React.Fragment>
-    //   <div style={{ fontSize: "22px", margin: "20px 0" }}>Loading...</div>
-    //   <Skeleton width={"100%"} height={60} rows={20} color={"#ddd"} />
-    // </React.Fragment>
-  );
+  return <Loader />;
 }
 export default App;
+export { ProductContext, GlobalCostingContext };

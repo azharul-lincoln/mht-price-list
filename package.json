@@ -7,7 +7,8 @@
     "axios": "^0.21.1",
     "html-react-parser": "^1.2.8",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "zustand": "^3.5.10"
   },
   "devDependencies": {
     "@babel/preset-es2015": "^7.0.0-beta.53",
