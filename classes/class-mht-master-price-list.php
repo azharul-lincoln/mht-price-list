@@ -62,8 +62,9 @@ class MHT_MasterPriceList {
     function test(){
         //255 75 22.5 shuld not reurn any item
         echo '<pre>';
-        print_r( $this->tire_size_item_arr('12r', '', '22-5') );
-        //print_r($this->brands_arr);
+        $mht_mpl_products = get_option( 'mht_mpl_products');
+        $mht_mpl_products = json_decode($mht_mpl_products, true);
+        var_dump($mht_mpl_products);
         die();
     }
 

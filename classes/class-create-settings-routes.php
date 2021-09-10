@@ -6,7 +6,7 @@ class WP_React_Settings_Rest_Route {
 
     public function __construct() {
         add_action( 'rest_api_init', [ $this, 'create_rest_routes' ] );
-        add_action('template_redirect', [$this, 'test']);
+       // add_action('template_redirect', [$this, 'test']);
     }
 
     public function test(){
@@ -96,9 +96,16 @@ class WP_React_Settings_Rest_Route {
 		return rest_ensure_response( 'success' );
         }
 
+        if(isset($req['mht_mpl_products'])){
+            $mht_mpl_products = sanitize_text_field( $req['mht_mpl_products'] );
+            update_option( 'mht_mpl_products', $mht_mpl_products );
+            return rest_ensure_response( 'success' );
+        }
+
         if(isset($req['global_costing_asumption'])){
             $global_costing_asumption = sanitize_text_field( $req['global_costing_asumption'] );
             update_option( 'mht_mpl_global_costing_asumption', $global_costing_asumption );
+            return rest_ensure_response( 'success' );
         }
 
 

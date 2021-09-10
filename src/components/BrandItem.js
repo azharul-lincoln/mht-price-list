@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { SetItems } from "./SetItems";
-import { ProductContext } from "../App";
+import { ProductContext, UpdateAppDataContext } from "../App";
 
 const BrandItem = ({ item, manufacturerKey, tireSize }) => {
   const { products, setProducts } = useContext(ProductContext);
+  const { updateAppData, setUpdateAppData } = useContext(UpdateAppDataContext);
+
   if (!("2_tire_set" in item)) {
     item["2_tire_set"] = [];
   }
@@ -87,6 +89,7 @@ const BrandItem = ({ item, manufacturerKey, tireSize }) => {
     });
 
     setProducts(newProducts);
+    setUpdateAppData(true);
   };
 
   return (

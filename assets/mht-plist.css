@@ -42,6 +42,12 @@
   cursor: pointer;
 }
 
+.wrap .header-container-action .header-action-item button:disabled {
+  background-color: #eeeeee;
+  color: rgba(12, 12, 12, 0.3);
+  border-color: rgba(118, 118, 118, 0.3);
+}
+
 .wrap .mht-price-list {
   background-color: #fff;
   max-height: 90vh;
