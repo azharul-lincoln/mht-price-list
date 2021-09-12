@@ -17,11 +17,17 @@ export default function HeaderTop({ url }) {
   const [openPanel, setOpenPanel] = useState(false);
   const updateButtonText = updateAppData ? "SAVE CHANGES" : "SAVED";
 
-  handleChange = (field, value) => {
+  handleChange = (field, objProperty, value) => {
     //you forgot you are setting metadata of state
+    // setGlobalCosting({
+    //   ...globalCosting,
+    //   metadata: { ...this.state.metadata, [field]: value },
+    // });
+    // console.log
+
     setGlobalCosting({
-      ...globalCosting,
-      metadata: { ...this.state.metadata, [field]: value },
+      ...defaultGlobalCosting,
+      twoTireSet: { ...defaultGlobalCosting[objProperty], [field]: value },
     });
   };
 
@@ -113,7 +119,11 @@ export default function HeaderTop({ url }) {
                       type="number"
                       className="form-control"
                       value={globalCosting.twoTireSet.ic}
-                      onChange={(e) => console.log(e)}
+                      onChange={(e) => {
+                        tempGlobalCosting = [...globalCosting];
+                        tempGlobalCosting.twoTireSet.ic = e.target.value;
+                        setGlobalCosting(tempGlobalCosting);
+                      }}
                     />
                   </td>
                   <td>
@@ -121,7 +131,15 @@ export default function HeaderTop({ url }) {
                       type="number"
                       className="form-control"
                       value={globalCosting.twoTireSet.fc}
-                      onChange={(e) => console.log(e.target.value)}
+                      onChange={(e) =>
+                        setGlobalCosting({
+                          ...defaultGlobalCosting,
+                          twoTireSet: {
+                            ...defaultGlobalCosting.twoTireSet,
+                            fc: e.target.value,
+                          },
+                        })
+                      }
                     />
                   </td>
                   <td>
@@ -129,7 +147,9 @@ export default function HeaderTop({ url }) {
                       type="number"
                       className="form-control"
                       value={globalCosting.twoTireSet.cc}
-                      onChange={(e) => console.log(e)}
+                      onChange={(e) =>
+                        handleChange("cc", "twoTireSet", e.target.value)
+                      }
                     />
                   </td>
                 </tr>
