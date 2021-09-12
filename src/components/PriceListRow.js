@@ -15,7 +15,13 @@ const PriceListRow = ({ tireSize, manufacturers }) => {
             // Pretty straightforward - use key for the key and value for the value.
             // Just to clarify: unlike object destructuring, the parameter names don't matter here.
             //console.log(value);
-            return <BrandItem item={manufacturer} />;
+            return (
+              <BrandItem
+                item={manufacturer}
+                manufacturerKey={key}
+                tireSize={tireSize}
+              />
+            );
           })}
         </div>
       </div>

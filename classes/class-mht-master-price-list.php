@@ -62,8 +62,9 @@ class MHT_MasterPriceList {
     function test(){
         //255 75 22.5 shuld not reurn any item
         echo '<pre>';
-        print_r( $this->tire_size_item_arr('12r', '', '22-5') );
-        //print_r($this->brands_arr);
+        $mht_mpl_products = get_option( 'mht_mpl_products');
+        $mht_mpl_products = json_decode($mht_mpl_products, true);
+        var_dump($mht_mpl_products);
         die();
     }
 
@@ -273,7 +274,7 @@ class MHT_MasterPriceList {
         }
 
 
-        $tire_size_item_arr['manufacturers'] = $this->get_manufacturers_arr($products);
+        $tire_size_item_arr['manufacturers'] = $this->get_manufacturers_arr($products, $tire_size_str);
 
         return $tire_size_item_arr;
 
@@ -293,7 +294,7 @@ class MHT_MasterPriceList {
 	}
 
 
-    public function get_manufacturers_arr($products){
+    public function get_manufacturers_arr($products, $tire_size_str){
         //echo count($products);
         $manufacturers = [];
 
@@ -312,10 +313,12 @@ class MHT_MasterPriceList {
 			// )
 			$product_menufacturars = $this->get_menufacturars_by_product_id( $product->get_id() );
 
+            $globalCosting = $this->getGlobalCostingByTireSet($tire_set_number);
+
             $product_item_arr = [
                 'produt_name' => $product_name,
-                'price' => !empty($product->get_price()) ? $this->currency_symbol. $product->get_price() : '',
-                'qty'   => $product->get_stock_quantity()
+                'price' => !empty($product->get_price()) ? $product->get_price() : '',
+                'if'   => $globalCosting->ic + $globalCosting->fc,
             ];
 
 			if(!empty($product_menufacturars)){
@@ -325,16 +328,70 @@ class MHT_MasterPriceList {
 						$manufacturers[$key]['name'] =  $product_menufacturar;
 					}
 
+                    $manufacturers[$key]['base_cost'] = $this->get_base_cost_for_manufect_by_size($tire_size_str, $key);
+
 					if( empty($manufacturers[$key][ $tire_set_number . '_tire_set' ]) ) {
 						$manufacturers[$key][ $tire_set_number . '_tire_set' ] = [];
 					}
 
+                    $product_item_arr['cost'] = $manufacturers[$key]['base_cost'] * $tire_set_number;
+                    $product_item_arr['cc'] = ($product_item_arr['cost'] != 0) ? ( $globalCosting->cc / 100 ) * ($product_item_arr['cost'] + $product_item_arr['if'] ) : 0; 
+                    $product_item_arr['total_cost'] = ($product_item_arr['cost'] != 0) ? $product_item_arr['cost'] + $product_item_arr['cc'] + $product_item_arr['if'] : 0;
+                    $product_item_arr['profit'] = ($product_item_arr['cost'] != 0) ? $product->get_price() - $product_item_arr['total_cost'] : 0;
 					array_push($manufacturers[$key][ $tire_set_number . '_tire_set' ], $product_item_arr);
 				}
 			}
         }
 
+        // echo '<pre>';
+        // print_r($manufacturers);
+        // die();
+
         return $manufacturers;
+    }
+
+    function getGlobalCostingByTireSet($tire_set_number){
+        $global_costing = get_option( 'mht_mpl_global_costing_asumption' );
+        if(empty($global_costing)){
+            return false;
+        }
+
+        $global_costing =  json_decode($global_costing);
+
+        if($tire_set_number == '2' && !empty($global_costing->twoTireSet) ){
+            return $global_costing->twoTireSet;
+        }
+        if($tire_set_number == '4' && !empty($global_costing->fourTireSet)){
+            return $global_costing->fourTireSet;
+        }
+        if($tire_set_number == '6' && !empty($global_costing->sixTireSet)){
+            return $global_costing->sixTireSet;
+        }
+        if($tire_set_number == '8' && !empty($global_costing->eightTireSet)){
+            return $global_costing->eightTireSet;
+        }
+
+        return false;
+    }
+
+    function get_base_cost_for_manufect_by_size($tire_size_str, $manufacturer_key){
+        $mht_mpl_products = get_option( 'mht_mpl_products');
+        if(!$mht_mpl_products){
+            return 0;
+        }
+
+        $mht_mpl_products = json_decode($mht_mpl_products, true);
+
+        foreach($mht_mpl_products as $tire_sizes ){
+            if($tire_sizes['tire_size'] == $tire_size_str){
+                $manufacturers = $tire_sizes['manufacturers'];
+                if(!empty($manufacturers[$manufacturer_key]['base_cost'])){
+                    return $manufacturers[$manufacturer_key]['base_cost'];
+                }
+            }
+        }
+
+        return 0;
     }
 
 }
