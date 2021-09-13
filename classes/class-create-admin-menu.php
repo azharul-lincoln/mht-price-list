@@ -112,23 +112,23 @@ class AZ_MHT_Create_Admin_Page
 	public function create_admin_menu()
 	{
 		$capability = 'manage_options';
-		$slug = 'wprk-settings';
+		$slug = 'mpl-settings';
 
-		$mht_plist_menu_page = add_menu_page(
-			__('Master Price List', 'wp-react-kickoff'),
-			__('Master Price List', 'wp-react-kickoff'),
-			$capability,
-			$slug,
-			[$this, 'mht_master_plist_html'],
-			'dashicons-screenoptions'
-		);
+		// $mht_plist_menu_page = add_menu_page(
+		// 	__('Master Price List', 'wp-react-kickoff'),
+		// 	__('Master Price List', 'wp-react-kickoff'),
+		// 	$capability,
+		// 	$slug,
+		// 	[$this, 'mht_master_plist_html'],
+		// 	'dashicons-screenoptions'
+		// );
 
-		add_action('load-' . $mht_plist_menu_page, [$this, 'load_admin_css']);
+		// add_action('load-' . $mht_plist_menu_page, [$this, 'load_admin_css']);
 
 		//react menu section
 		$mht_plist_menu_page_react = add_menu_page(
-			__('React Master Price', 'wp-react-kickoff'),
-			__('React Master Price', 'wp-react-kickoff'),
+			__('Master Price List', 'wp-react-kickoff'),
+			__('Master Price List', 'wp-react-kickoff'),
 			$capability,
 			$slug.'-react',
 			[$this, 'react_menu'],

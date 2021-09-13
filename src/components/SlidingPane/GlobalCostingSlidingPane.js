@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import SlidingPane from "react-sliding-pane";
 import axios from "axios";
+import { AwesomeButtonProgress } from "react-awesome-button";
 
 import { ProductContext, GlobalCostingContext } from "../../App";
 
 export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
   const { globalCosting, setGlobalCosting } = useContext(GlobalCostingContext);
   const { products, setProducts } = useContext(ProductContext);
-  //const [openPanel, setOpenPanel] = useState(false);
+  const [updateDataRequire, setUpdateDataRequire] = useState(false);
+  const [saveText, setSaveText] = useState("Saved");
 
   const handleChange = (objProperty, field, value) => {
     setGlobalCosting({
@@ -17,12 +19,16 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
         [field]: value,
       },
     });
+
+    //set variable to update the btn indegation
+    setUpdateDataRequire(true);
+    setSaveText("Update");
   };
 
   const urlGc = `${appLocalizer.apiUrl}/mpl/v1/settings`;
   const urlProduct = `${appLocalizer.apiUrl}/mpl/v1/products`;
 
-  const updateglobalCosting = async () => {
+  const updateglobalCosting = async (next) => {
     axios
       .post(
         urlGc,
@@ -43,7 +49,13 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
             console.log("serverResponseProduct", serverResponse);
             if (serverResponse.data) {
               setProducts(serverResponse.data);
-              setOpenPanel(false);
+              setSaveText("Saved");
+              setUpdateDataRequire(false);
+              next();
+
+              setTimeout(() => {
+                setOpenPanel(false);
+              }, 2000);
             }
           });
         }
@@ -60,10 +72,10 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
         isOpen={openPanel}
         title="Global Costing Asumption."
         subtitle=""
-        // onRequestClose={() => {
-        //   // triggered on "<" on left top click or on outside click
-        //   setOpenPanel(false);
-        // }}
+        onRequestClose={() => {
+          // triggered on "<" on left top click or on outside click
+          setOpenPanel(false);
+        }}
       >
         <div className="container">
           <div className="row">
@@ -213,9 +225,23 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
             </table>
           </div>
           <div className="row">
-            <button onClick={() => updateglobalCosting()}>
-              close the panel
-            </button>
+            <div className="update-btn-container">
+              <AwesomeButtonProgress
+                size="large"
+                type="primary"
+                loadingLabel="Updating...."
+                disabled={!updateDataRequire}
+                fakePress={false}
+                action={(element, next) => {
+                  updateglobalCosting(next);
+                  // setTimeout(() => {
+                  //   next();
+                  // }, 600);
+                }}
+              >
+                {saveText}
+              </AwesomeButtonProgress>
+            </div>
           </div>
         </div>
       </SlidingPane>

@@ -1,4 +1,9 @@
 @import "./bootstrap-scss/bootstrap.scss";
+@import "./awesome-btn-styles.scss";
+
+$color-black: #15181b;
+$color-black-text: #f0f0f1;
+$color-link: #2271b1;
 
 $small: 1600px;
 .wrap {
@@ -6,13 +11,44 @@ $small: 1600px;
 
   .header-container-action {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
     background-color: #eaeaea;
     position: sticky;
     top: 32px;
-    padding: 10px 40px;
+    // padding: 10px 40px;
+    padding: 0;
     box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+
+    .header-action-item {
+      &.headline {
+        position: absolute;
+        left: 30px;
+        top: 20px;
+      }
+      &.action {
+        margin-right: 30px;
+      }
+    }
+
+    .gobal-settings {
+      width: 60px;
+      height: 60px;
+      background: $color-black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $color-black-text;
+      /* align-self: flex-end; */
+      .icon-container {
+        font-size: 40px;
+        line-height: 30px;
+        a {
+          color: $color-black-text;
+        }
+      }
+    }
 
     .headline {
       h1 {
@@ -25,22 +61,22 @@ $small: 1600px;
       }
     }
     .header-action-item {
-      button {
-        border-radius: 4px;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-        color: white;
-        background: #04aa6d;
-        padding: 10px 40px;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
+      // button {
+      //   border-radius: 4px;
+      //   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+      //   color: white;
+      //   background: #04aa6d;
+      //   padding: 10px 40px;
+      //   border: none;
+      //   font-weight: bold;
+      //   cursor: pointer;
 
-        &:disabled {
-          background-color: #eeeeee;
-          color: rgba(12, 12, 12, 0.3);
-          border-color: rgba(118, 118, 118, 0.3);
-        }
-      }
+      //   &:disabled {
+      //     background-color: #eeeeee;
+      //     color: rgba(12, 12, 12, 0.3);
+      //     border-color: rgba(118, 118, 118, 0.3);
+      //   }
+      // }
     }
   }
 
@@ -68,6 +104,10 @@ $small: 1600px;
             min-width: 600px;
             width: 600px;
             max-width: 600px;
+
+            .title {
+              padding: 10px 0;
+            }
 
             &.tire-manufacturer,
             &.tire-cost {
@@ -118,6 +158,9 @@ $small: 1600px;
       .tire-manufacturer {
         max-width: 150px;
         min-width: 150px;
+        h3 {
+          font-size: 20px;
+        }
       }
 
       .tire-cost {
@@ -132,6 +175,7 @@ $small: 1600px;
         .cost-input-container {
           span.dolar {
             font-weight: bold;
+            margin-right: 3px;
           }
           input {
             max-width: 120px;
@@ -151,6 +195,16 @@ $small: 1600px;
           align-items: center;
           justify-content: center;
           flex-wrap: wrap;
+
+          .titel {
+            padding: 15px 0 10px;
+            h3 {
+              text-transform: uppercase;
+            }
+          }
+          h3 {
+            font-size: 18px;
+          }
 
           &.tire-manufacturer {
             display: flex;
@@ -206,8 +260,9 @@ $small: 1600px;
               max-width: 200px;
               width: 200px;
               a {
+                color: $color-link;
                 display: inline-block;
-                // padding-left: 10px;
+                padding: 0 10px;
                 text-align: center;
                 font-size: 13px;
                 padding-top: 6px;
@@ -301,6 +356,7 @@ $small: 1600px;
               // border-left: 1px solid #ccc;
               height: auto;
               width: 600px;
+              font-size: 14px;
             }
           }
         }
@@ -424,4 +480,33 @@ $small: 1600px;
 .slide-pane__overlay.mht-sliding-pan-overlay {
   z-index: 99999;
   margin-top: 32px;
+}
+
+.mht-sliding-pan-overlay {
+  .slide-pane__header {
+    background: $color-black;
+    color: $color-black-text;
+    h2.slide-pane__title {
+      font-size: 22px;
+      color: $color-black-text;
+    }
+
+    .slide-pane__close svg {
+      color: $color-black-text;
+    }
+  }
+  .slide-pane__content {
+    .table {
+      > thead {
+        background: $color-black;
+        color: $color-black-text;
+        text-transform: uppercase;
+        word-spacing: 5px;
+      }
+    }
+  }
+  .update-btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
