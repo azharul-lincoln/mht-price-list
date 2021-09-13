@@ -55,6 +55,18 @@ class WP_React_Settings_Rest_Route {
             'permission_callback' => [ $this, 'save_settings_permission' ]
         ] );
 
+        register_rest_route( 'mpl/v1', '/products', [
+            'methods' => 'GET',
+            'callback' => [ $this, 'get_mpl_products' ],
+            'permission_callback' => [ $this, 'get_settings_permission' ]
+        ] );
+
+    }
+
+    function get_mpl_products(){
+        $AZ_MHT_Create_Admin_Page = new AZ_MHT_Create_Admin_Page();
+        $products = $AZ_MHT_Create_Admin_Page->all_products_body_arr();
+        return rest_ensure_response( $products );
     }
 
 

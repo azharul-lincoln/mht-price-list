@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import SlidingPane from "react-sliding-pane";
+import axios from "axios";
 
 import { ProductContext, GlobalCostingContext } from "../../App";
 
 export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
   const { globalCosting, setGlobalCosting } = useContext(GlobalCostingContext);
+  const { products, setProducts } = useContext(ProductContext);
   //const [openPanel, setOpenPanel] = useState(false);
 
   const handleChange = (objProperty, field, value) => {
@@ -16,6 +18,38 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
       },
     });
   };
+
+  const urlGc = `${appLocalizer.apiUrl}/mpl/v1/settings`;
+  const urlProduct = `${appLocalizer.apiUrl}/mpl/v1/products`;
+
+  const updateglobalCosting = async () => {
+    axios
+      .post(
+        urlGc,
+        {
+          global_costing_asumption: JSON.stringify(globalCosting),
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            "X-WP-NONCE": appLocalizer.nonce,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        if (res.data == "success") {
+          axios.get(urlProduct).then((serverResponse) => {
+            console.log("serverResponseProduct", serverResponse);
+            if (serverResponse.data) {
+              setProducts(serverResponse.data);
+              setOpenPanel(false);
+            }
+          });
+        }
+      });
+  };
+
   console.log(globalCosting);
 
   return (
@@ -179,7 +213,9 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
             </table>
           </div>
           <div className="row">
-            <button onClick={() => setOpenPanel(false)}>close the panel</button>
+            <button onClick={() => updateglobalCosting()}>
+              close the panel
+            </button>
           </div>
         </div>
       </SlidingPane>
