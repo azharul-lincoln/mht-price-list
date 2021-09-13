@@ -29,7 +29,7 @@ const BrandItem = ({ item, manufacturerKey, tireSize }) => {
   const handleCostChange = (event) => {
     let newProducts = products.map((product) => {
       if (tireSize == product.tire_size) {
-        console.log(product["manufacturers"][manufacturerKey]);
+        //console.log(product["manufacturers"][manufacturerKey]);
         product["manufacturers"][manufacturerKey]["base_cost"] =
           event.target.value;
 

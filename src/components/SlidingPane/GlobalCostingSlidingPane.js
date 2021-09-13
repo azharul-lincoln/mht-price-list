@@ -43,10 +43,10 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
         }
       )
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         if (res.data == "success") {
           axios.get(urlProduct).then((serverResponse) => {
-            console.log("serverResponseProduct", serverResponse);
+            //console.log("serverResponseProduct", serverResponse);
             if (serverResponse.data) {
               setProducts(serverResponse.data);
               setSaveText("Saved");
@@ -62,7 +62,7 @@ export default function GlobalCostingSlidingPane({ openPanel, setOpenPanel }) {
       });
   };
 
-  console.log(globalCosting);
+  //console.log(globalCosting);
 
   return (
     <React.Fragment>

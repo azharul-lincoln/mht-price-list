@@ -28,7 +28,7 @@ export default function HeaderTop({ url }) {
 
   const updateProducts = async (next) => {
     //updateButtonText = "UPDATING...";
-    console.log(products);
+    //console.log(products);
     axios
       .post(
         url,
@@ -51,7 +51,7 @@ export default function HeaderTop({ url }) {
   };
 
   useEffect(() => {
-    console.log(updateAppData);
+    //console.log(updateAppData);
     if (updateAppData) {
       setUpdateButtonText("SAVE CHANGES");
     } else {

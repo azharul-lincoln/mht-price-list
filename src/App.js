@@ -14,7 +14,7 @@ const GlobalCostingContext = React.createContext();
 const UpdateAppDataContext = React.createContext();
 
 function App() {
-  console.log(appLocalizer.products);
+  //console.log(appLocalizer.products);
   const [products, setProducts] = useState(appLocalizer.products);
   const [globalCosting, setGlobalCosting] = useState(undefined);
   const [updateAppData, setUpdateAppData] = useState(false);
