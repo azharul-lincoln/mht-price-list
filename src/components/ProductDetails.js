@@ -40,9 +40,7 @@ export default function ProductDetails({ product }) {
         </div>
         <div className="product-price">
           <div className="label">SellPrice</div>
-          <div className="value">
-            {product.cost != 0 ? "$" + product.price : "--"}
-          </div>
+          <div className="value">{"$" + product.price}</div>
         </div>
         <div className="profit">
           <div className="label">Profit</div>
