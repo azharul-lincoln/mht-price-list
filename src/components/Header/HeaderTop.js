@@ -1,35 +1,19 @@
 import React, { useContext, useState } from "react";
 import { IoMdSettings } from "react-icons/io";
 import axios from "axios";
-import SlidingPane from "react-sliding-pane";
 
 import {
   ProductContext,
   UpdateAppDataContext,
   GlobalCostingContext,
 } from "../../App";
+import GlobalCostingSlidingPane from "../SlidingPane/GlobalCostingSlidingPane";
 
 export default function HeaderTop({ url }) {
   const { products, setProducts } = useContext(ProductContext);
   const { updateAppData, setUpdateAppData } = useContext(UpdateAppDataContext);
-  const { globalCosting, setGlobalCosting } = useContext(GlobalCostingContext);
-  console.log(globalCosting);
   const [openPanel, setOpenPanel] = useState(false);
   const updateButtonText = updateAppData ? "SAVE CHANGES" : "SAVED";
-
-  handleChange = (field, objProperty, value) => {
-    //you forgot you are setting metadata of state
-    // setGlobalCosting({
-    //   ...globalCosting,
-    //   metadata: { ...this.state.metadata, [field]: value },
-    // });
-    // console.log
-
-    setGlobalCosting({
-      ...defaultGlobalCosting,
-      twoTireSet: { ...defaultGlobalCosting[objProperty], [field]: value },
-    });
-  };
 
   const updateProducts = async () => {
     //updateButtonText = "UPDATING...";
@@ -88,95 +72,10 @@ export default function HeaderTop({ url }) {
           </div>
         </div>
       </div>
-
-      <SlidingPane
-        className="mht-sliding-pan"
-        overlayClassName="mht-sliding-pan-overlay"
-        isOpen={openPanel}
-        title="Global Costing Asumption."
-        subtitle=""
-        // onRequestClose={() => {
-        //   // triggered on "<" on left top click or on outside click
-        //   setOpenPanel(false);
-        // }}
-      >
-        <div className="container">
-          <div className="row">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">#Tire Sets</th>
-                  <th scope="col">Installation Cost</th>
-                  <th scope="col">Freight Cost</th>
-                  <th scope="col">Credit Card Charge</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">2 Tire Set</th>
-                  <td>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={globalCosting.twoTireSet.ic}
-                      onChange={(e) => {
-                        tempGlobalCosting = [...globalCosting];
-                        tempGlobalCosting.twoTireSet.ic = e.target.value;
-                        setGlobalCosting(tempGlobalCosting);
-                      }}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={globalCosting.twoTireSet.fc}
-                      onChange={(e) =>
-                        setGlobalCosting({
-                          ...defaultGlobalCosting,
-                          twoTireSet: {
-                            ...defaultGlobalCosting.twoTireSet,
-                            fc: e.target.value,
-                          },
-                        })
-                      }
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={globalCosting.twoTireSet.cc}
-                      onChange={(e) =>
-                        handleChange("cc", "twoTireSet", e.target.value)
-                      }
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">4 Tire Set</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">6 Tire Set</th>
-                  <td>Credit Card Charge</td>
-                  <td>@twitter</td>
-                </tr>
-                <tr>
-                  <th scope="row">8 Tire Set</th>
-                  <td>Credit Card Charge</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div className="row">
-            <button onClick={() => setOpenPanel(false)}>close the panel</button>
-          </div>
-        </div>
-      </SlidingPane>
+      <GlobalCostingSlidingPane
+        openPanel={openPanel}
+        setOpenPanel={setOpenPanel}
+      />
     </React.Fragment>
   );
 }
