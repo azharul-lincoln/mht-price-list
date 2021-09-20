@@ -335,7 +335,8 @@ class MHT_MasterPriceList {
 					}
 
                     $product_item_arr['cost'] = $manufacturers[$key]['base_cost'] * $tire_set_number;
-                    $product_item_arr['cc'] = ($product_item_arr['cost'] != 0) ? ( $globalCosting->cc / 100 ) * ($product_item_arr['cost'] + $product_item_arr['if'] ) : 0; 
+                    // $product_item_arr['cc'] = ($product_item_arr['cost'] != 0) ? ( $globalCosting->cc / 100 ) * ($product_item_arr['cost'] + $product_item_arr['if'] ) : 0; 
+                    $product_item_arr['cc'] = ($product_item_arr['cost'] != 0) ? ( $globalCosting->cc / 100 ) * ($product_item_arr['price'] ) : 0; 
                     $product_item_arr['total_cost'] = ($product_item_arr['cost'] != 0) ? $product_item_arr['cost'] + $product_item_arr['cc'] + $product_item_arr['if'] : 0;
                     $product_item_arr['profit'] = ($product_item_arr['cost'] != 0) ? $product->get_price() - $product_item_arr['total_cost'] : 0;
 					array_push($manufacturers[$key][ $tire_set_number . '_tire_set' ], $product_item_arr);
