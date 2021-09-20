@@ -82,8 +82,8 @@ $small: 1600px;
 
   .mht-price-list {
     background-color: #fff;
-    max-height: 90vh;
-    overflow-x: auto;
+    // max-height: 90vh;
+    // overflow-x: auto;
     overflow-y: auto;
 
     .mht-plist-row {
@@ -101,9 +101,10 @@ $small: 1600px;
           .tire-set-item {
             display: flex;
             justify-content: center;
-            min-width: 600px;
-            width: 600px;
-            max-width: 600px;
+            // min-width: 600px;
+            // width: 600px;
+            // max-width: 600px;
+            width: 20%;
 
             .title {
               padding: 10px 0;
@@ -217,58 +218,137 @@ $small: 1600px;
             }
             width: 100%;
             box-sizing: border-box;
-            display: flex;
+            display: block;
             border-bottom: 1px solid #ddd;
 
             &:last-child {
               border-bottom: none;
             }
 
-            > div {
-              width: 66px;
-              min-width: 66px;
-              max-width: 66px;
-              text-align: center;
-              border-right: 1px solid #ddd;
-              padding: 10px 0;
-              font-size: 12px;
+            .pdetail-row{
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              flex: 1;
+              &.first{
+                // padding-bottom: 20px;
+              }
+              .pdetail-item{
+                flex: 1;
 
-              &:last-child {
-                border-right: none;
+                .label{
+                  background-color: #2271b1;
+                  color: #fff;
+                  text-align: center;
+                  padding: 3px 0;
+                }
 
-                .label {
-                  border-right: 1px solid #ddd;
+                .product-link, .value{
+                  padding: 15px;
+                  text-align: left;
+                  a{
+                    text-align: left;
+                    text-decoration: none;
+                    color: #2271b1;
+                  }
+                }
+
+                .value{
+                  text-align: center;
+                }
+
+                &.product-name{
+                  // max-width: 50%;
+                  .value{
+                    border-right: 1px solid #dee2e6;
+
+                  }
+
+                }
+
+                &.profit{
+                  max-width: 20%;
+                  text-align: center;
+
+                  // .value{
+                  //   display: flex;
+                  //   justify-content: center;
+                  //   align-items: center;
+                  //   flex-direction: column;
+                  // }
+
+                }
+                
+              }
+
+              .item{
+                flex: 1;
+                .label{
+                  background-color: #dedede;
+                  color: #555;
+                  text-align: center;
+                  padding: 3px 0;
+                  border-right: 1px solid #dee2e6;
+                }
+                .value{
+                  text-align: center;
+                  padding: 15px 0;
+                  // border-right: 1px solid #ddd;
+                  border-right: 1px solid #dee2e6;
+                  &.last-item{
+                    border-right: none;
+
+                  }
                 }
               }
 
-              .label {
-                padding-bottom: 5px;
-                border-bottom: 1px solid #ddd;
-                background: #eee;
-                margin-top: -10px;
-                padding-top: 5px;
-                font-weight: bold;
-              }
-
-              .value {
-                padding-top: 12px;
-              }
             }
 
-            .product-name {
-              min-width: 200px;
-              max-width: 200px;
-              width: 200px;
-              a {
-                color: $color-link;
-                display: inline-block;
-                padding: 0 10px;
-                text-align: center;
-                font-size: 13px;
-                padding-top: 6px;
-                text-decoration: none;
-              }
-            }
+            // > div {
+            //   width: 66px;
+            //   min-width: 66px;
+            //   max-width: 66px;
+            //   text-align: center;
+            //   border-right: 1px solid #ddd;
+            //   padding: 10px 0;
+            //   font-size: 12px;
+
+            //   &:last-child {
+            //     border-right: none;
+
+            //     .label {
+            //       border-right: 1px solid #ddd;
+            //     }
+            //   }
+
+            //   .label {
+            //     padding-bottom: 5px;
+            //     border-bottom: 1px solid #ddd;
+            //     background: #eee;
+            //     margin-top: -10px;
+            //     padding-top: 5px;
+            //     font-weight: bold;
+            //   }
+
+            //   .value {
+            //     padding-top: 12px;
+            //   }
+            // }
+
+            // .product-name {
+            //   min-width: 200px;
+            //   max-width: 200px;
+            //   width: 200px;
+            //   a {
+            //     color: $color-link;
+            //     display: inline-block;
+            //     padding: 0 10px;
+            //     text-align: center;
+            //     font-size: 13px;
+            //     padding-top: 6px;
+            //     text-decoration: none;
+            //   }
+            // }
 
             .tire-cost {
             }
@@ -286,55 +366,6 @@ $small: 1600px;
 
             .profit {
             }
-
-            // .product-detail {
-            //   width: 50%;
-            //   float: left;
-            //   box-sizing: border-box;
-            //   &:last-child {
-            //     border-left: 1px solid #ccc;
-            //     //   padding-left: 10px;
-            //   }
-
-            //   @media screen and (max-width: $small) {
-            //     width: 100%;
-            //   }
-
-            //   .product-detail-item {
-            //     padding: 5px 0;
-            //     border-bottom: 1px solid #ccc;
-            //     display: flex;
-            //     .item-lavel {
-            //       flex-grow: 1;
-            //       p {
-            //         padding: 0;
-            //         margin: 0;
-            //         padding-left: 10px;
-            //       }
-            //     }
-            //     .item-amount {
-            //       flex-grow: 1;
-            //       align-self: flex-end;
-            //       p {
-            //         padding: 0;
-            //         margin: 0;
-            //         display: inline-block;
-            //         float: right;
-            //         padding-right: 10px;
-            //         font-weight: bolder;
-            //       }
-            //     }
-
-            //     &.profit {
-            //       background-color: #795548;
-            //       color: #fff;
-
-            //       p {
-            //         font-weight: bolder;
-            //       }
-            //     }
-            //   }
-            // }
           }
         }
 
@@ -355,7 +386,7 @@ $small: 1600px;
               border-right: 1px solid #ccc;
               // border-left: 1px solid #ccc;
               height: auto;
-              width: 600px;
+              width: 20%;
               font-size: 14px;
             }
           }

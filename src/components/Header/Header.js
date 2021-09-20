@@ -21,28 +21,28 @@ export const Header = () => {
             <div className="titel">
               <h3>2 tire set</h3>
             </div>
-            <HeaderDetail />
+            {/* <HeaderDetail /> */}
           </div>
 
           <div className="tire-set-item">
             <div className="titel">
               <h3>4 tire set</h3>
             </div>
-            <HeaderDetail />
+            {/* <HeaderDetail /> */}
           </div>
 
           <div className="tire-set-item">
             <div className="titel">
               <h3>6 tire set</h3>
             </div>
-            <HeaderDetail />
+            {/* <HeaderDetail /> */}
           </div>
 
           <div className="tire-set-item">
             <div className="titel">
               <h3>8 tire set</h3>
             </div>
-            <HeaderDetail />
+            {/* <HeaderDetail /> */}
           </div>
         </div>
       </div>

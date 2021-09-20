@@ -12856,8 +12856,6 @@ span.aws-btn__bubble {
 
 .wrap .mht-price-list {
   background-color: #fff;
-  max-height: 90vh;
-  overflow-x: auto;
   overflow-y: auto;
 }
 
@@ -12886,9 +12884,7 @@ span.aws-btn__bubble {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  min-width: 600px;
-  width: 600px;
-  max-width: 600px;
+  width: 20%;
 }
 
 .wrap .mht-price-list .mht-plist-row.plist-header .plist-row-item .tire-set-item .title {
@@ -13049,9 +13045,7 @@ span.aws-btn__bubble {
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: block;
   border-bottom: 1px solid #ddd;
 }
 
@@ -13063,51 +13057,78 @@ span.aws-btn__bubble {
   border-bottom: none;
 }
 
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container > div {
-  width: 66px;
-  min-width: 66px;
-  max-width: 66px;
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item .label {
+  background-color: #2271b1;
+  color: #fff;
   text-align: center;
-  border-right: 1px solid #ddd;
-  padding: 10px 0;
-  font-size: 12px;
+  padding: 3px 0;
 }
 
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container > div:last-child {
-  border-right: none;
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item .product-link, .wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item .value {
+  padding: 15px;
+  text-align: left;
 }
 
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container > div:last-child .label {
-  border-right: 1px solid #ddd;
-}
-
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container > div .label {
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
-  background: #eee;
-  margin-top: -10px;
-  padding-top: 5px;
-  font-weight: bold;
-}
-
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container > div .value {
-  padding-top: 12px;
-}
-
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .product-name {
-  min-width: 200px;
-  max-width: 200px;
-  width: 200px;
-}
-
-.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .product-name a {
-  color: #2271b1;
-  display: inline-block;
-  padding: 0 10px;
-  text-align: center;
-  font-size: 13px;
-  padding-top: 6px;
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item .product-link a, .wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item .value a {
+  text-align: left;
   text-decoration: none;
+  color: #2271b1;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item .value {
+  text-align: center;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item.product-name .value {
+  border-right: 1px solid #dee2e6;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .pdetail-item.profit {
+  max-width: 20%;
+  text-align: center;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .item {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .item .label {
+  background-color: #dedede;
+  color: #555;
+  text-align: center;
+  padding: 3px 0;
+  border-right: 1px solid #dee2e6;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .item .value {
+  text-align: center;
+  padding: 15px 0;
+  border-right: 1px solid #dee2e6;
+}
+
+.wrap .mht-price-list .mht-plist-row .tire-detail-container .tire-set-item .product-detail-container .pdetail-row .item .value.last-item {
+  border-right: none;
 }
 
 .wrap .mht-price-list .mht-plist-row .tire-detail-container .brand-items {
@@ -13143,7 +13164,7 @@ span.aws-btn__bubble {
           justify-content: center;
   border-right: 1px solid #ccc;
   height: auto;
-  width: 600px;
+  width: 20%;
   font-size: 14px;
 }
 
