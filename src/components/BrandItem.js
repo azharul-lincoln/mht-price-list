@@ -100,7 +100,7 @@ const BrandItem = ({ item, manufacturerKey, tireSize }) => {
 
       <div className="tire-cost tire-set-item">
         <div className="cost-input-container">
-          <span className="dolar">$</span>
+          {/* <span className="dolar">$</span> */}
           <input
             type="number"
             value={item.base_cost}
